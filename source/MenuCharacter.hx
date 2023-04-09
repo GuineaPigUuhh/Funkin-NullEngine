@@ -13,7 +13,7 @@ class MenuCharacter extends FlxSprite
 
 		this.character = character;
 
-		var tex = Paths.getSparrowAtlas('campaign_menu_UI_characters');
+		var tex = Paths.getSparrowAtlas('menus/story_mode/characters/default_chars');
 		frames = tex;
 
 		animation.addByPrefix('bf', "BF idle dance white", 24);

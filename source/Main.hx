@@ -5,6 +5,8 @@ import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
 import openfl.display.FPS;
+import flixel.FlxG;
+import ui.PreferencesMenu;
 import openfl.display.Sprite;
 import openfl.events.AsyncErrorEvent;
 import openfl.events.Event;
@@ -85,57 +87,29 @@ class Main extends Sprite
 		#end
 
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
+		initSettings();
 
 		#if !mobile
 		fpsCounter = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
 		#end
-		/* 
-			video = new Video();
-			addChild(video);
-
-			var netConnection = new NetConnection();
-			netConnection.connect(null);
-
-			netStream = new NetStream(netConnection);
-			netStream.client = {onMetaData: client_onMetaData};
-			netStream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, netStream_onAsyncError);
-
-			#if (js && html5)
-			overlay = new Sprite();
-			overlay.graphics.beginFill(0, 0.5);
-			overlay.graphics.drawRect(0, 0, 560, 320);
-			overlay.addEventListener(MouseEvent.MOUSE_DOWN, overlay_onMouseDown);
-			overlay.buttonMode = true;
-			addChild(overlay);
-
-			netConnection.addEventListener(NetStatusEvent.NET_STATUS, netConnection_onNetStatus);
-			#else
-			netStream.play("assets/preload/music/dredd.mp4");
-			#end 
-		 */
+		
 	}
-	/* 
-		private function client_onMetaData(metaData:Dynamic)
-		{
-			video.attachNetStream(netStream);
 
-			video.width = video.videoWidth;
-			video.height = video.videoHeight;
-		}
+	function initSettings() {
+		Settings.init();
+		PreferencesMenu.initPrefs();
+		PlayerSettings.init();
+		Highscore.load();
 
-		private function netStream_onAsyncError(event:AsyncErrorEvent):Void
-		{
-			trace("Error loading video");
-		}
+		#if discord_rpc
+		DiscordClient.initialize();
 
-		private function netConnection_onNetStatus(event:NetStatusEvent):Void
+		Application.current.onExit.add(function(exitCode)
 		{
-		}
+			DiscordClient.shutdown();
+		});
+		#end
+	}
 
-		private function overlay_onMouseDown(event:MouseEvent):Void
-		{
-			netStream.play("assets/preload/music/dredd.mp4");
-		}
-	 */
 }

@@ -86,6 +86,7 @@ class ChartingState extends MusicBeatState
 		curSection = lastSection;
 
 		gridBG = FlxGridOverlay.create(GRID_SIZE, GRID_SIZE, GRID_SIZE * 8, GRID_SIZE * 16);
+		gridBG.alpha = 0.87;
 		add(gridBG);
 
 		leftIcon = new HealthIcon('bf');
@@ -125,7 +126,6 @@ class ChartingState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = true;
-		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		tempBpm = _song.bpm;
 

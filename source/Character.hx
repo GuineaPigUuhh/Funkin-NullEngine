@@ -487,6 +487,9 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+			default:
+
+		
 		}
 
 		dance();
@@ -688,6 +691,13 @@ class Character extends FlxSprite
 				danced = !danced;
 			}
 		}
+
+		
+	}
+	public var singAnims:Array<String> = ["singLEFT", "singDOWN", "singUP", "singRIGHT"];
+	public function playSingAnim(dir:Int, altString:String = "")
+	{
+		playAnim(singAnims[dir] + altString, true);
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)

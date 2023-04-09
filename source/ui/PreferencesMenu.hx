@@ -29,13 +29,13 @@ class PreferencesMenu extends ui.OptionsState.Page
 		camera = menuCamera;
 
 		add(items = new TextMenuList());
-
-		createPrefItem('naughtyness', 'censor-naughty', true);
-		createPrefItem('downscroll', 'downscroll', false);
-		createPrefItem('flashing menu', 'flashing-menu', true);
-		createPrefItem('Camera Zooming on Beat', 'camera-zoom', true);
-		createPrefItem('FPS Counter', 'fps-counter', true);
-		createPrefItem('Auto Pause', 'auto-pause', false);
+		
+		createPrefItem('naughtyness', 'censor-naughty');
+		createPrefItem('downscroll', 'downscroll');
+		createPrefItem('flashing menu', 'flashing-menu');
+		createPrefItem('Camera Zooming on Beat', 'camera-zoom');
+		createPrefItem('FPS Counter', 'fps-counter');
+		createPrefItem('Auto Pause', 'auto-pause');
 
 		camFollow = new FlxObject(FlxG.width / 2, 0, 140, 70);
 		if (items != null)
@@ -54,29 +54,17 @@ class PreferencesMenu extends ui.OptionsState.Page
 
 	public static function getPref(pref:String):Dynamic
 	{
-		return preferences.get(pref);
-	}
-
-	// easy shorthand?
-	public static function setPref(pref:String, value:Dynamic):Void
-	{
-		preferences.set(pref, value);
+		return Reflect.getProperty(FlxG.save.data, pref);
 	}
 
 	public static function initPrefs():Void
 	{
-		preferenceCheck('censor-naughty', true);
-		preferenceCheck('downscroll', false);
-		preferenceCheck('flashing-menu', true);
-		preferenceCheck('camera-zoom', true);
-		preferenceCheck('fps-counter', true);
-		preferenceCheck('auto-pause', false);
-		preferenceCheck('master-volume', 1);
-
-		#if muted
-		setPref('master-volume', 0);
-		FlxG.sound.muted = true;
-		#end
+		preferenceCheck('censor-naughty');
+		preferenceCheck('downscroll');
+		preferenceCheck('flashing-menu');
+		preferenceCheck('camera-zoom');
+		preferenceCheck('fps-counter');
+		preferenceCheck('auto-pause');
 
 		if (!getPref('fps-counter'))
 			FlxG.stage.removeChild(Main.fpsCounter);
@@ -84,13 +72,14 @@ class PreferencesMenu extends ui.OptionsState.Page
 		FlxG.autoPause = getPref('auto-pause');
 	}
 
-	private function createPrefItem(prefName:String, prefString:String, prefValue:Dynamic):Void
+	private function createPrefItem(prefName:String, prefString:String):Void
 	{
+		var coolValue = Reflect.getProperty(FlxG.save.data, prefString);
 		items.createItem(120, (120 * items.length) + 30, prefName, AtlasFont.Bold, function()
 		{
-			preferenceCheck(prefString, prefValue);
+			preferenceCheck(prefString);
 
-			switch (Type.typeof(prefValue).getName())
+			switch (Type.typeof(coolValue).getName())
 			{
 				case 'TBool':
 					prefToggle(prefString);
@@ -100,7 +89,7 @@ class PreferencesMenu extends ui.OptionsState.Page
 			}
 		});
 
-		switch (Type.typeof(prefValue).getName())
+		switch (Type.typeof(coolValue).getName())
 		{
 			case 'TBool':
 				createCheckbox(prefString);
@@ -109,12 +98,12 @@ class PreferencesMenu extends ui.OptionsState.Page
 				trace('swag');
 		}
 
-		trace(Type.typeof(prefValue).getName());
+		trace(Type.typeof(coolValue).getName());
 	}
 
 	function createCheckbox(prefString:String)
 	{
-		var checkbox:CheckboxThingie = new CheckboxThingie(0, 120 * (items.length - 1), preferences.get(prefString));
+		var checkbox:CheckboxThingie = new CheckboxThingie(0, 120 * (items.length - 1), Reflect.getProperty(FlxG.save.data, prefString));
 		checkboxes.push(checkbox);
 		add(checkbox);
 	}
@@ -124,11 +113,12 @@ class PreferencesMenu extends ui.OptionsState.Page
 	 */
 	private function prefToggle(prefName:String)
 	{
-		var daSwap:Bool = preferences.get(prefName);
+		var daSwap:Bool = Reflect.getProperty(FlxG.save.data, prefName);
 		daSwap = !daSwap;
-		preferences.set(prefName, daSwap);
+
+		Reflect.setProperty(FlxG.save.data, prefName, daSwap);
+		
 		checkboxes[items.selectedIndex].daValue = daSwap;
-		trace('toggled? ' + preferences.get(prefName));
 
 		switch (prefName)
 		{
@@ -140,8 +130,6 @@ class PreferencesMenu extends ui.OptionsState.Page
 			case 'auto-pause':
 				FlxG.autoPause = getPref('auto-pause');
 		}
-
-		if (prefName == 'fps-counter') {}
 	}
 
 	override function update(elapsed:Float)
@@ -159,12 +147,11 @@ class PreferencesMenu extends ui.OptionsState.Page
 		});
 	}
 
-	private static function preferenceCheck(prefString:String, prefValue:Dynamic):Void
+	private static function preferenceCheck(prefString:String):Void
 	{
 		if (preferences.get(prefString) == null)
 		{
-			preferences.set(prefString, prefValue);
-			trace('set preference!');
+			preferences.set(prefString, Reflect.getProperty(FlxG.save.data, prefString));
 		}
 		else
 		{
@@ -181,7 +168,7 @@ class CheckboxThingie extends FlxSprite
 	{
 		super(x, y);
 
-		frames = Paths.getSparrowAtlas('checkboxThingie');
+		frames = Paths.getSparrowAtlas('menus/options/checkboxThingie');
 		animation.addByPrefix('static', 'Check Box unselected', 24, false);
 		animation.addByPrefix('checked', 'Check Box selecting animation', 24, false);
 

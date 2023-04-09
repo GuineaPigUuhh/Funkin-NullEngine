@@ -56,9 +56,9 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(Paths.image('menus/main/menuBG'));
 		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.17;
+		bg.scrollFactor.y = 0;
 		bg.setGraphicSize(Std.int(bg.width * 1.2));
 		bg.updateHitbox();
 		bg.screenCenter();
@@ -68,7 +68,7 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(Paths.image('menuDesat'));
+		magenta = new FlxSprite(Paths.image('menus/main/menuDesat'));
 		magenta.scrollFactor.x = bg.scrollFactor.x;
 		magenta.scrollFactor.y = bg.scrollFactor.y;
 		magenta.setGraphicSize(Std.int(bg.width));
@@ -117,16 +117,6 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.cameras.reset(new SwagCamera());
 		FlxG.camera.follow(camFollow, null, 0.06);
-		// FlxG.camera.setScrollBounds(bg.x, bg.x + bg.width, bg.y, bg.y + bg.height * 1.2);
-
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-
-		versionShit.text += '(Newgrounds exclusive preview)';
-
-		// NG.core.calls.event.logEvent('swag').send();
 
 		super.create();
 	}
@@ -222,7 +212,7 @@ private class MainMenuList extends MenuTypedList<MainMenuItem>
 
 	public function new()
 	{
-		atlas = Paths.getSparrowAtlas('main_menu');
+		atlas = Paths.getSparrowAtlas('menus/main/main_menu');
 		super(Vertical);
 	}
 
@@ -247,7 +237,7 @@ private class MainMenuItem extends AtlasMenuItem
 	public function new(x = 0.0, y = 0.0, name, atlas, callback)
 	{
 		super(x, y, name, atlas, callback);
-		scrollFactor.set();
+		scrollFactor.set(0, 0);
 	}
 
 	override function changeAnim(anim:String)
