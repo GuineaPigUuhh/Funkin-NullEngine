@@ -1,5 +1,6 @@
 package;
 
+import FNFManager.CharactersManager;
 import Section.SwagSection;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -10,6 +11,12 @@ import haxe.io.Path;
 
 using StringTools;
 
+#if desktop
+import sys.FileSystem;
+import sys.io.File;
+import sys.thread.Thread;
+#end
+
 class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
@@ -17,6 +24,13 @@ class Character extends FlxSprite
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = 'bf';
+
+	public var icon:String = "bf";
+
+	public var cameraOffset:Array<Float> = [0, 0];
+	public var charOffset:Array<Float> = [0, 0];
+
+	public var isGF:Bool = false;
 
 	public var holdTimer:Float = 0;
 
@@ -33,6 +47,7 @@ class Character extends FlxSprite
 		var tex:FlxAtlasFrames;
 		antialiasing = true;
 
+		icon = curCharacter;
 		switch (curCharacter)
 		{
 			case 'gf':
@@ -488,8 +503,32 @@ class Character extends FlxSprite
 
 				flipX = true;
 			default:
+				var customChar = CharactersManager.charsMAP.get(curCharacter);
 
-		
+				frames = Paths.getSparrowAtlas(customChar.sprite);
+
+				flipX = customChar.flipX;
+				antialiasing = customChar.antialiasing;
+				icon = customChar.icon;
+				isGF = customChar.isGF;
+
+				if (customChar.scale != 1)
+				{
+					scale.set(customChar.scale, customChar.scale);
+					updateHitbox();
+				}
+
+				for (e in customChar.anims)
+				{
+					if (e.indices != null)
+						animation.addByIndices(e.name, e.prefix, e.indices, "", e.fps, e.loop);
+					else
+					{
+						animation.addByPrefix(e.name, e.prefix, e.fps, e.loop);
+					}
+
+					addOffset(e.name, e.offset[0], e.offset[1]);
+				}
 		}
 
 		dance();
@@ -691,10 +730,10 @@ class Character extends FlxSprite
 				danced = !danced;
 			}
 		}
-
-		
 	}
+
 	public var singAnims:Array<String> = ["singLEFT", "singDOWN", "singUP", "singRIGHT"];
+
 	public function playSingAnim(dir:Int, altString:String = "")
 	{
 		playAnim(singAnims[dir] + altString, true);

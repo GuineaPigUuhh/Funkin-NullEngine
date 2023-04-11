@@ -1,0 +1,13 @@
+<char name="bf-xml" scale="1" flipX="true" antialiasing="true" sprite="characters/BOYFRIEND" icon="bf">
+    <anim name="idle" prefix="BF idle dance" fps="24" loop="false" offset="-5,0"/>
+    <anim name="singLEFT" prefix="BF NOTE LEFT0" fps="24" loop="false" offset="12,-6"/>
+    <anim name="singDOWN" prefix="BF NOTE DOWN0" fps="24" loop="false" offset="-10,-50"/>
+    <anim name="singUP" prefix="BF NOTE UP0" fps="24" loop="false" offset="-29,27"/>
+    <anim name="singRIGHT" prefix="BF NOTE RIGHT0" fps="24" loop="false" offset="-38,-7"/>
+    <anim name="singLEFTmiss" prefix="BF NOTE LEFT MISS" fps="24" loop="false" offset="12,-6"/>
+    <anim name="singDOWNmiss" prefix="BF NOTE DOWN MISS" fps="24" loop="false" offset="-10,-50"/>
+    <anim name="singUPmiss" prefix="BF NOTE UP MISS" fps="24" loop="false" offset="-29,27"/>
+    <anim name="singRIGHTmiss" prefix="BF NOTE RIGHT MISS" fps="24" loop="false" offset="-38,-7"/>
+    <anim name="hey" prefix="BF HEY" fps="24" loop="false" offset="-5,0"/>
+    <anim name="scared" prefix="BF idle shaking" fps="24" loop="false" offset="-5,0"/>
+</char>

@@ -66,7 +66,7 @@ class Main extends Sprite
 	var netStream:NetStream;
 	private var overlay:Sprite;
 
-	public static var fpsCounter:FPS;
+	public static var fpsCounter:InfoObject;
 
 	private function setupGame():Void
 	{
@@ -90,7 +90,7 @@ class Main extends Sprite
 		initSettings();
 
 		#if !mobile
-		fpsCounter = new FPS(10, 3, 0xFFFFFF);
+		fpsCounter = new InfoObject(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
 		#end
 		
@@ -98,6 +98,9 @@ class Main extends Sprite
 
 	function initSettings() {
 		Settings.init();
+
+		FNFManager.load();
+
 		PreferencesMenu.initPrefs();
 		PlayerSettings.init();
 		Highscore.load();

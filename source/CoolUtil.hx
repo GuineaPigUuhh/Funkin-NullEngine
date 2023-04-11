@@ -57,8 +57,8 @@ class CoolUtil
 	}
 
 	/*
-	* just lerp that does camLerpShit for u so u dont have to do it every time
-	*/
+	 * just lerp that does camLerpShit for u so u dont have to do it every time
+	 */
 	public static function coolLerp(a:Float, b:Float, ratio:Float):Float
 	{
 		return FlxMath.lerp(a, b, camLerpShit(ratio));

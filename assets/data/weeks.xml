@@ -1,0 +1,45 @@
+<week name="week0" characters=",bf,gf" title="Tutorial">
+    <song name="Tutorial" color="#77459c" icon="gf"/>
+</week>
+
+<week name="week1" characters="dad,bf,gf" title="Daddy Dearest">
+    <song name="Bopeebo" color="#77459c" icon="dad"/>
+    <song name="Fresh" color="#77459c" icon="dad"/>
+    <song name="Dadbattle" color="#77459c" icon="dad"/>
+</week>
+
+<week name="week2" characters="spooky,bf,gf" title="Spooky Month!">
+    <song name="Spookeez" color="#784d85" icon="spooky"/>
+    <song name="South" color="#784d85" icon="spooky"/>
+    <song name="Monster" color="#784d85" icon="monster"/>
+</week>
+
+<week name="week3" characters="pico,bf,gf" title="V.S. PICO">
+    <song name="Pico" color="#38da87" icon="pico"/>
+    <song name="Philly" color="#38da87" icon="pico"/>
+    <song name="Blammed" color="#38da87" icon="pico"/>
+</week>
+
+<week name="week4" characters="mom,bf,gf" title="MOMMY MUST MURDER">
+    <song name="Satin-Panties" color="#ffac4f" icon="mom"/>
+    <song name="High" color="#ffac4f" icon="mom"/>
+    <song name="Milf" color="#ffac4f" icon="mom"/>
+</week>
+
+<week name="week5" characters="parents-christmas,bf,gf" title="RED SNOW">
+    <song name="Cocoa" color="#baf5ff" icon="parents"/>
+    <song name="Eggnog" color="#baf5ff" icon="parents"/>
+    <song name="Winter-Horrorland" color="#baf5ff" icon="monster"/>
+</week>
+
+<week name="week6" characters="senpai,bf,gf" title="hating simulator ft. moawling">
+    <song name="Senpai" color="#c883f7" icon="senpai"/>
+    <song name="Roses" color="#c883f7" icon="senpai"/>
+    <song name="Thorns" color="#c883f7" icon="spirit"/>
+</week>
+
+<week name="week7" characters="tankman,bf,gf" title="V.S. TANKMAN">
+    <song name="Ugh" color="#ffc500" icon="tankman"/>
+    <song name="Guns" color="#ffc500" icon="tankman"/>
+    <song name="Stress" color="#ffc500" icon="tankman"/>
+</week>

@@ -46,7 +46,6 @@ class VideoState extends MusicBeatState
 		overlay.graphics.beginFill(0, 0.5);
 		overlay.graphics.drawRect(0, 0, 1280, 720);
 		overlay.addEventListener(MouseEvent.MOUSE_DOWN, overlay_onMouseDown);
-//
 		overlay.buttonMode = true;
 		// FlxG.stage.addChild(overlay);
 	}

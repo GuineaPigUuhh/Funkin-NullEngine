@@ -1,5 +1,6 @@
 package;
 
+import FNFManager.MenuCharactersManager;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 
@@ -7,28 +8,60 @@ class MenuCharacter extends FlxSprite
 {
 	public var character:String;
 
+	var originX:Float = 0;
+	var originY:Float = 0;
+
 	public function new(x:Float, character:String = 'bf')
 	{
 		super(x);
+		y += 70;
+
+		originX = x;
+		originY = y;
+
+		frames = Paths.getSparrowAtlas('menus/story_mode/characters/default_chars');
+
+		antialiasing = true;
+
+		changeChar(character);
+	}
+
+	public function changeChar(character:String)
+	{
+		if (character == this.character)
+			return;
 
 		this.character = character;
 
-		var tex = Paths.getSparrowAtlas('menus/story_mode/characters/default_chars');
-		frames = tex;
-
-		animation.addByPrefix('bf', "BF idle dance white", 24);
-		animation.addByPrefix('bfConfirm', 'BF HEY!!', 24, false);
-		animation.addByPrefix('gf', "GF Dancing Beat WHITE", 24);
-		animation.addByPrefix('dad', "Dad idle dance BLACK LINE", 24);
-		animation.addByPrefix('spooky', "spooky dance idle BLACK LINES", 24);
-		animation.addByPrefix('pico', "Pico Idle Dance", 24);
-		animation.addByPrefix('mom', "Mom Idle BLACK LINES", 24);
-		animation.addByPrefix('parents-christmas', "Parent Christmas Idle", 24);
-		animation.addByPrefix('senpai', "SENPAI idle Black Lines", 24);
-		animation.addByPrefix('tankman', "Tankman Menu BLACK", 24);
-		// Parent Christmas Idle
-
-		animation.play(character);
+		visible = true;
+		scale.set(1, 1);
 		updateHitbox();
+
+		setPosition(originX, originY);
+
+		switch (character)
+		{
+			case "":
+				visible = false;
+
+			default:
+				var curData = MenuCharactersManager.menuCharsMAP.get(character);
+
+				animation.addByPrefix(character, curData.idleAnim, 24);
+				if (curData.confirmAnim != "")
+					animation.addByPrefix(character + '-confirm', curData.confirmAnim, 24, false);
+
+				flipX = curData.flipX;
+				if (curData.scale != 1)
+				{
+					scale.set(curData.scale, curData.scale);
+					updateHitbox();
+				}
+
+				x += curData.offset[0];
+				y += curData.offset[1];
+
+				animation.play(character);
+		}
 	}
 }
