@@ -1,12 +1,13 @@
 package;
 
+// import Discord.DiscordClient;
+import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;
+import lime.app.Application;
 import openfl.Assets;
 import openfl.Lib;
 import openfl.display.FPS;
-import flixel.FlxG;
-import ui.PreferencesMenu;
 import openfl.display.Sprite;
 import openfl.events.AsyncErrorEvent;
 import openfl.events.Event;
@@ -15,6 +16,7 @@ import openfl.events.NetStatusEvent;
 import openfl.media.Video;
 import openfl.net.NetConnection;
 import openfl.net.NetStream;
+import ui.PreferencesMenu;
 
 class Main extends Sprite
 {
@@ -25,7 +27,7 @@ class Main extends Sprite
 	#if web
 	var framerate:Int = 60; // How many frames per second the game should run at.
 	#else
-	var framerate:Int = 144; // How many frames per second the game should run at.
+	var framerate:Int = 60; // How many frames per second the game should run at.
 
 	#end
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
@@ -90,13 +92,13 @@ class Main extends Sprite
 		initSettings();
 
 		#if !mobile
-		fpsCounter = new InfoObject(10, 3, 0xFFFFFF);
+		fpsCounter = new InfoObject(10, 3);
 		addChild(fpsCounter);
 		#end
-		
 	}
 
-	function initSettings() {
+	function initSettings()
+	{
 		Settings.init();
 
 		FNFManager.load();
@@ -114,5 +116,4 @@ class Main extends Sprite
 		});
 		#end
 	}
-
 }

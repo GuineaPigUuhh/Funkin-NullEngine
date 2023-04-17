@@ -1,10 +1,11 @@
 package;
 
+import flixel.FlxG;
+import flixel.math.FlxMath;
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
-import flixel.math.FlxMath;
 #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
@@ -12,7 +13,6 @@ import openfl.display._internal.stats.DrawCallContext;
 #if flash
 import openfl.Lib;
 #end
-
 #if openfl
 import openfl.system.System;
 #end
@@ -36,7 +36,7 @@ class InfoObject extends TextField
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 
-	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
+	public function new(x:Float = 10, y:Float = 10)
 	{
 		super();
 
@@ -46,11 +46,12 @@ class InfoObject extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 14, color);
+		defaultTextFormat = new TextFormat(openfl.utils.Assets.getFont(Paths.font("vcr.ttf")).fontName, 15, 0xFFFFFF);
 		autoSize = LEFT;
-        visible = true;
+		visible = true;
 		multiline = true;
 		text = "";
+		alpha = 0.85;
 
 		cacheCount = 0;
 		currentTime = 0;
@@ -80,19 +81,23 @@ class InfoObject extends TextField
 		var currentCount = times.length;
 		currentFPS = Math.round((currentCount + cacheCount) / 2);
 
-        updateInfo();
+		updateInfo();
+
+		if (FlxG.keys.justPressed.F1)
+		{
+			FNFManager.reload();
+			trace('the Engine has already finished loading the Data Folder Files');
+		}
 
 		cacheCount = currentCount;
 	}
 
-    function updateInfo()
-    {
-        var memoryMegas:Float = 0;
-        memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
+	function updateInfo()
+	{
+		var memoryMegas:Float = 0;
+		memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 
-        text = "FPS: " + currentFPS;
-        text += " • Memory: " + memoryMegas + " MB";
-
-        text += "\n";
-    }    
+		text = "FPS: " + currentFPS + " • MEM: " + memoryMegas + " MB\n";
+		text += "[F1] - Reload Data Folder";
+	}
 }

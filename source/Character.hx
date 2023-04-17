@@ -503,32 +503,7 @@ class Character extends FlxSprite
 
 				flipX = true;
 			default:
-				var customChar = CharactersManager.charsMAP.get(curCharacter);
-
-				frames = Paths.getSparrowAtlas(customChar.sprite);
-
-				flipX = customChar.flipX;
-				antialiasing = customChar.antialiasing;
-				icon = customChar.icon;
-				isGF = customChar.isGF;
-
-				if (customChar.scale != 1)
-				{
-					scale.set(customChar.scale, customChar.scale);
-					updateHitbox();
-				}
-
-				for (e in customChar.anims)
-				{
-					if (e.indices != null)
-						animation.addByIndices(e.name, e.prefix, e.indices, "", e.fps, e.loop);
-					else
-					{
-						animation.addByPrefix(e.name, e.prefix, e.fps, e.loop);
-					}
-
-					addOffset(e.name, e.offset[0], e.offset[1]);
-				}
+				loadXMLchar(curCharacter);
 		}
 
 		dance();
@@ -557,6 +532,36 @@ class Character extends FlxSprite
 		}
 	}
 
+	function loadXMLchar(char:String)
+	{
+		var customChar = CharactersManager.charsMAP.get(char);
+
+		frames = Paths.getSparrowAtlas(customChar.sprite);
+
+		flipX = customChar.flipX;
+		antialiasing = customChar.antialiasing;
+		icon = customChar.icon;
+		isGF = customChar.isGF;
+
+		if (customChar.scale != 1)
+		{
+			scale.set(customChar.scale, customChar.scale);
+			updateHitbox();
+		}
+
+		for (e in customChar.anims)
+		{
+			if (e.indices != null)
+				animation.addByIndices(e.name, e.prefix, e.indices, "", e.fps, e.loop);
+			else
+			{
+				animation.addByPrefix(e.name, e.prefix, e.fps, e.loop);
+			}
+
+			addOffset(e.name, e.offset[0], e.offset[1]);
+		}
+	}
+
 	public function loadMappedAnims()
 	{
 		var swagshit = Song.loadFromJson('picospeaker', 'stress');
@@ -573,7 +578,6 @@ class Character extends FlxSprite
 
 		TankmenBG.animationNotes = animationNotes;
 
-		trace(animationNotes);
 		animationNotes.sort(sortAnims);
 	}
 
@@ -636,8 +640,6 @@ class Character extends FlxSprite
 				{
 					if (Conductor.songPosition > animationNotes[0][0])
 					{
-						trace('played shoot anim' + animationNotes[0][1]);
-
 						var shootAnim:Int = 1;
 
 						if (animationNotes[0][1] >= 2)

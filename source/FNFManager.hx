@@ -1,5 +1,6 @@
 package;
 
+import sys.FileSystem;
 #if desktop
 import sys.FileSystem;
 import sys.io.File;
@@ -8,18 +9,22 @@ import sys.thread.Thread;
 
 class FNFManager
 {
+	public static var managers:Array<Dynamic> = [WeeksManager, CharactersManager, MenuCharactersManager, StagesDataManager];
+
 	public static function load()
 	{
-		WeeksManager.load();
-		CharactersManager.load();
-		MenuCharactersManager.load();
+		for (managerShit in managers)
+		{
+			managerShit.load();
+		}
 	}
 
 	public static function reload()
 	{
-		WeeksManager.reload();
-		CharactersManager.reload();
-		MenuCharactersManager.reload();
+		for (managerShit in managers)
+		{
+			managerShit.reload();
+		}
 	}
 }
 
@@ -238,4 +243,51 @@ typedef MenuCharData =
 	var confirmAnim:String;
 	var offset:Array<Float>;
 	var flipX:Bool;
+}
+
+class StagesDataManager
+{
+	public static var stagesDataXml:Xml;
+	public static var stagesDataMAP:Map<String, StageData> = [];
+
+	public static var stageList:Array<String> = [];
+
+	public static function load()
+	{
+		stagesDataXml = Xml.parse(File.getContent(Paths.xml('stages')));
+		for (e in stagesDataXml.elementsNamed('stageData'))
+		{
+			var stageData:StageData = {
+				camZoom: 1.05,
+				camSpeed: 1,
+				charsPos: {dad: [100, 100], gf: [400, 130], boyfriend: [770, 450]},
+			};
+
+			if (e.exists('camZoom'))
+				stageData.camZoom = Std.parseFloat(e.get('camZoom'));
+			if (e.exists('camSpeed'))
+				stageData.camSpeed = Std.parseFloat(e.get('camSpeed'));
+
+			for (char in e.elementsNamed('charPos'))
+			{
+				Reflect.setProperty(stageData.charsPos, char.get('name'), XmlUtil.parseArrayFloat(char.get('position')));
+			}
+
+			stageList.push(e.get('name'));
+			stagesDataMAP.set(e.get('name'), stageData);
+		}
+	}
+
+	public static function reload()
+	{
+		stagesDataMAP = [];
+		load();
+	}
+}
+
+typedef StageData =
+{
+	var camZoom:Float;
+	var camSpeed:Float;
+	var charsPos:{dad:Array<Float>, gf:Array<Float>, boyfriend:Array<Float>};
 }

@@ -48,6 +48,7 @@ import sys.thread.Thread;
 class TitleState extends MusicBeatState
 {
 	public static var initialized:Bool = false;
+
 	var startedIntro:Bool;
 
 	var blackScreen:FlxSprite;
@@ -69,7 +70,6 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-
 		startedIntro = false;
 
 		FlxG.game.focusLostFramerate = 60;
@@ -97,11 +97,6 @@ class TitleState extends MusicBeatState
 			// QUICK PATCH OOPS!
 			if (!StoryMenuState.weekUnlocked[0])
 				StoryMenuState.weekUnlocked[0] = true;
-		}
-
-		if (FlxG.save.data.seenVideo != null)
-		{
-			VideoState.seenVideo = FlxG.save.data.seenVideo;
 		}
 
 		#if FREEPLAY
@@ -300,9 +295,6 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
-		if (FlxG.sound.music != null)
-			FlxG.sound.music.onComplete = function() FlxG.switchState(new VideoState());
-
 		startedIntro = true;
 		// credGroup.add(credTextShit);
 	}
@@ -326,7 +318,6 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
@@ -439,7 +430,7 @@ class TitleState extends MusicBeatState
 		super.beatHit();
 
 		if (!startedIntro)
-			return ;
+			return;
 
 		if (skippedIntro)
 		{

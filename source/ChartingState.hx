@@ -1,6 +1,7 @@
 package;
 
 import Conductor.BPMChangeEvent;
+import FNFManager.StagesDataManager;
 import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxG;
@@ -120,6 +121,7 @@ class ChartingState extends MusicBeatState
 				needsVoices: true,
 				player1: 'bf',
 				player2: 'dad',
+				stage: 'stage',
 				speed: 1,
 				validScore: false
 			};
@@ -225,6 +227,7 @@ class ChartingState extends MusicBeatState
 		stepperBPM.name = 'song_bpm';
 
 		var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList'));
+		var stages:Array<String> = StagesDataManager.stageList;
 
 		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
@@ -240,6 +243,12 @@ class ChartingState extends MusicBeatState
 		});
 		player2DropDown.selectedLabel = _song.player2;
 
+		var stageDropDown = new FlxUIDropDownMenu(10, 180, FlxUIDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
+		{
+			_song.stage = stages[Std.parseInt(stage)];
+		});
+		stageDropDown.selectedLabel = _song.stage;
+
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
 		tab_group_song.add(UI_songTitle);
@@ -252,6 +261,8 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(loadAutosaveBtn);
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
+
+		tab_group_song.add(stageDropDown);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
 

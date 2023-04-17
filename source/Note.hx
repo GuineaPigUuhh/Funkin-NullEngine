@@ -56,15 +56,14 @@ class Note extends FlxSprite
 		isSustainNote = sustainNote;
 
 		x += 50;
-		// MAKE SURE ITS DEFINITELY OFF SCREEN?
 		y -= 2000;
+
 		this.strumTime = strumTime;
 
 		this.noteData = noteData;
 
-		var daStage:String = PlayState.curStage;
-
-		switch (daStage)
+		colorSwap = new ColorSwap();
+		switch (PlayState.curStage)
 		{
 			case 'school' | 'schoolEvil':
 				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
@@ -113,34 +112,22 @@ class Note extends FlxSprite
 				setGraphicSize(Std.int(width * 0.7));
 				updateHitbox();
 				antialiasing = true;
-
-				// colorSwap.colorToReplace = 0xFFF9393F;
-				// colorSwap.newColor = 0xFF00FF00;
-
-				// color = FlxG.random.color();
-				// color.saturation *= 4;
-				// replaceColor(0xFFC1C1C1, FlxColor.RED);
 		}
-
-		colorSwap = new ColorSwap();
 		shader = colorSwap.shader;
-		updateColors();
+		colorSwap.update(arrowColors[noteData]);
 
 		switch (noteData)
 		{
 			case 0:
-				x += swagWidth * 0;
 				animation.play('purpleScroll');
 			case 1:
-				x += swagWidth * 1;
 				animation.play('blueScroll');
 			case 2:
-				x += swagWidth * 2;
 				animation.play('greenScroll');
 			case 3:
-				x += swagWidth * 3;
 				animation.play('redScroll');
 		}
+		x += swagWidth * noteData;
 
 		// trace(prevNote);
 
@@ -192,11 +179,6 @@ class Note extends FlxSprite
 				// prevNote.setGraphicSize();
 			}
 		}
-	}
-
-	public function updateColors():Void
-	{
-		colorSwap.update(arrowColors[noteData]);
 	}
 
 	override function update(elapsed:Float)

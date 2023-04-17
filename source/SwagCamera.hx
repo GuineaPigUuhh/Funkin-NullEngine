@@ -4,9 +4,21 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 class SwagCamera extends FlxCamera
 {
+	var bopTween:FlxTween = null;
+
+	public function bop(shit:Float, getStageZoom:Float)
+	{
+		this.zoom = getStageZoom + shit;
+		if (bopTween != null)
+			bopTween.cancel();
+		bopTween = FlxTween.tween(this, {zoom: getStageZoom}, 0.45, {ease: FlxEase.circOut});
+	}
+
 	/**
 	 * properly follow framerate
 	 * most of this just copied from FlxCamera,

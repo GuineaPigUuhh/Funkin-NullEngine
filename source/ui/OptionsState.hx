@@ -25,26 +25,16 @@ class OptionsState extends MusicBeatState
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
-		menuBG.scrollFactor.set(0, 0);
+		menuBG.scrollFactor.set();
 		add(menuBG);
 
 		var options = addPage(Options, new OptionsMenu(false));
 		var preferences = addPage(Preferences, new PreferencesMenu());
 		var controls = addPage(Controls, new ControlsMenu());
 
-		if (options.hasMultipleOptions())
-		{
-			options.onExit.add(exitToMainMenu);
-			controls.onExit.add(switchPage.bind(Options));
-			// colors.onExit.add(switchPage.bind(Options));
-			preferences.onExit.add(switchPage.bind(Options));
-		}
-		else
-		{
-			// No need to show Options page
-			controls.onExit.add(exitToMainMenu);
-			setPage(Controls);
-		}
+		options.onExit.add(exitToMainMenu);
+		controls.onExit.add(switchPage.bind(Options));
+		preferences.onExit.add(switchPage.bind(Options));
 
 		// disable for intro transition
 		currentPage.enabled = false;
@@ -101,7 +91,7 @@ class Page extends FlxGroup
 	public var canExit = true;
 
 	var controls(get, never):Controls;
-
+ 
 	inline function get_controls()
 		return PlayerSettings.player1.controls;
 
@@ -168,6 +158,7 @@ class OptionsMenu extends Page
 		super();
 
 		add(items = new TextMenuList());
+
 		createItem('preferences', function() switchPage(Preferences));
 		createItem("controls", function() switchPage(Controls));
 

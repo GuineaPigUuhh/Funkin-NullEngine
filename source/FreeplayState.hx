@@ -81,9 +81,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		// scoreText.autoSize = false;
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
-		// scoreText.alignment = RIGHT;
 
 		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0x99000000);
 		scoreBG.antialiasing = false;
@@ -110,6 +108,7 @@ class FreeplayState extends MusicBeatState
 	{
 		var icon:Int = 0;
 		var color:Int = 0;
+
 		for (song in songs)
 		{
 			addSong(song, weekNum, songCharacters[icon], songColors[color]);
@@ -171,7 +170,6 @@ class FreeplayState extends MusicBeatState
 			PlayState.storyDifficulty = curDifficulty;
 
 			PlayState.storyWeek = songs[curSelected].week;
-			trace('CUR WEEK' + PlayState.storyWeek);
 			LoadingState.loadAndSwitchState(new PlayState());
 		}
 	}
@@ -189,7 +187,16 @@ class FreeplayState extends MusicBeatState
 
 		PlayState.storyDifficulty = curDifficulty;
 
-		diffText.text = "< " + CoolUtil.difficultyString() + " >";
+		diffText.text = switch (CoolUtil.difficultyArray.length)
+		{
+			case 0:
+				"< - >";
+			case 1:
+				CoolUtil.difficultyString(PlayState.storyDifficulty);
+			default:
+				"< " + CoolUtil.difficultyString(PlayState.storyDifficulty) + " >";
+		}
+
 		positionHighscore();
 	}
 

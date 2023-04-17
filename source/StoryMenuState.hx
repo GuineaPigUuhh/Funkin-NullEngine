@@ -254,7 +254,7 @@ class StoryMenuState extends MusicBeatState
 			PlayState.isStoryMode = true;
 			selectedWeek = true;
 
-			var diffic = "";
+			var diffic:String = "";
 
 			switch (curDifficulty)
 			{

@@ -1,6 +1,5 @@
 package;
 
-
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -93,17 +92,11 @@ class MainMenuState extends MusicBeatState
 		menuItems.enabled = false; // disable for intro
 		menuItems.createItem('story mode', function() startExitState(new StoryMenuState()));
 		menuItems.createItem('freeplay', function() startExitState(new FreeplayState()));
-		// addMenuItem('options', function () startExitState(new OptionMenu()));
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
-
-		if (VideoState.seenVideo)
-			menuItems.createItem('kickstarter', selectDonate, hasPopupBlocker);
-		else
-			menuItems.createItem('donate', selectDonate, hasPopupBlocker);
+		menuItems.createItem('donate', selectDonate, hasPopupBlocker);
 		#end
-		menuItems.createItem('options', function() startExitState(new OptionsState()));
-
+		// menuItems.createItem('options', function() startExitState(new OptionsState()));
 
 		// center vertically
 		var spacing = 160;
@@ -126,8 +119,6 @@ class MainMenuState extends MusicBeatState
 		super.finishTransIn();
 
 		menuItems.enabled = true;
-
-	
 	}
 
 	function onMenuItemChange(selected:MenuItem)

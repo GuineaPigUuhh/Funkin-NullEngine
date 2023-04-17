@@ -6,6 +6,7 @@ import flixel.util.FlxColor;
 class ColorSwap
 {
 	public var shader(default, null):ColorSwapShader;
+
 	public var colorToReplace(default, set):FlxColor;
 	public var newColor(default, set):FlxColor;
 	public var daTime(default, set):Float;
@@ -26,7 +27,6 @@ class ColorSwap
 	{
 		shader.uTime.value[0] += elapsed;
 		hueShit += elapsed;
-		// trace(shader.money.value[0]);
 	}
 
 	function set_colorToReplace(color:FlxColor):FlxColor
