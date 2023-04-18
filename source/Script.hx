@@ -6,7 +6,7 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-class ScriptTemplate
+class Script
 {
 	public var path:String = "";
 	public var fileExists = FileSystem.exists("");

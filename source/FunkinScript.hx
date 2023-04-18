@@ -7,7 +7,7 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-class FunkinScript extends ScriptTemplate
+class FunkinScript extends Script
 {
 	public var interp:Interp;
 	public var parser:Parser;

@@ -36,6 +36,8 @@ class InfoObject extends TextField
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 
+	var reloadButton:Bool = true;
+
 	public function new(x:Float = 10, y:Float = 10)
 	{
 		super();
@@ -83,10 +85,13 @@ class InfoObject extends TextField
 
 		updateInfo();
 
-		if (FlxG.keys.justPressed.F1)
+		if (reloadButton)
 		{
-			FNFManager.reload();
-			trace('the Engine has already finished loading the Data Folder Files');
+			if (FlxG.keys.justPressed.F1)
+			{
+				FNFManager.reload();
+				trace('the Engine has already finished loading the Data Folder Files');
+			}
 		}
 
 		cacheCount = currentCount;
@@ -98,6 +103,9 @@ class InfoObject extends TextField
 		memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 
 		text = "FPS: " + currentFPS + " • MEM: " + memoryMegas + " MB\n";
-		text += "[F1] - Reload Data Folder";
+		if (reloadButton)
+		{
+			text += "[F1] - Reload Data Folder";
+		}
 	}
 }
