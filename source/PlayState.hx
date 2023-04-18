@@ -209,11 +209,11 @@ class PlayState extends MusicBeatState
 		switch (songName)
 		{
 			case 'senpai':
-				dialogue = CoolUtil.coolTextFile(AssetsHelper.getPreloadPath('songs/senpai/senpaiDialogue.txt'));
+				dialogue = CoolUtil.coolTextFile(AssetsHelper.getFilePath('songs/senpai/senpaiDialogue', TEXT));
 			case 'roses':
-				dialogue = CoolUtil.coolTextFile(AssetsHelper.getPreloadPath('songs/roses/rosesDialogue.txt'));
+				dialogue = CoolUtil.coolTextFile(AssetsHelper.getFilePath('songs/roses/rosesDialogue', TEXT));
 			case 'thorns':
-				dialogue = CoolUtil.coolTextFile(AssetsHelper.getPreloadPath('songs/thorns/thornsDialogue.txt'));
+				dialogue = CoolUtil.coolTextFile(AssetsHelper.getFilePath('songs/thorns/thornsDialogue', TEXT));
 		}
 
 		#if discord_rpc
