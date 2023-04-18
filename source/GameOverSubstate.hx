@@ -48,7 +48,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);
 
-		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
+		FlxG.sound.play(AssetsHelper.sound('fnf_loss_sfx' + stageSuffix));
 		Conductor.changeBPM(100);
 
 		// FlxG.camera.followLerp = 1;
@@ -112,7 +112,7 @@ class GameOverSubstate extends MusicBeatSubstate
 					bf.startedDeath = true;
 					coolStartDeath(0.2);
 
-					FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + randomGameover), 1, false, null, true, function()
+					FlxG.sound.play(AssetsHelper.sound('jeffGameover/jeffGameover-' + randomGameover), 1, false, null, true, function()
 					{
 						if (!isEnding)
 							FlxG.sound.music.fadeIn(4, 0.2, 1);
@@ -135,7 +135,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	private function coolStartDeath(?vol:Float = 1):Void
 	{
 		if (!isEnding)
-			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix), vol);
+			FlxG.sound.playMusic(AssetsHelper.music('gameOver' + stageSuffix), vol);
 	}
 
 	override function beatHit()
@@ -154,7 +154,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			isEnding = true;
 			bf.playAnim('deathConfirm', true);
 			FlxG.sound.music.stop();
-			FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
+			FlxG.sound.play(AssetsHelper.music('gameOverEnd' + stageSuffix));
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()

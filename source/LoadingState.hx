@@ -40,7 +40,7 @@ class LoadingState extends MusicBeatState
 		add(bg);
 
 		funkay = new FlxSprite();
-		funkay.loadGraphic(Paths.image('funkay'));
+		funkay.loadGraphic(AssetsHelper.image('funkay'));
 		funkay.setGraphicSize(0, FlxG.height);
 		funkay.updateHitbox();
 		funkay.antialiasing = true;
@@ -162,12 +162,12 @@ class LoadingState extends MusicBeatState
 
 	static function getSongPath()
 	{
-		return Paths.inst(PlayState.SONG.song);
+		return AssetsHelper.inst(PlayState.SONG.song);
 	}
 
 	static function getVocalPath()
 	{
-		return Paths.voices(PlayState.SONG.song);
+		return AssetsHelper.voices(PlayState.SONG.song);
 	}
 
 	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
@@ -185,7 +185,7 @@ class LoadingState extends MusicBeatState
 		if (!loaded)
 			return new LoadingState(target, stopMusic);
 		#end
-		
+
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 

@@ -36,7 +36,7 @@ class HealthIcon extends FlxSprite
 		{
 			if (animation.getByName(newChar) == null)
 			{
-				loadGraphic(Paths.image('icons/' + newChar), true, 150, 150);
+				loadGraphic(AssetsHelper.image('icons/' + newChar), true, 150, 150);
 				animation.add(newChar, [0, 1], 0, false, isPlayer);
 			}
 			animation.play(newChar);
@@ -59,6 +59,6 @@ class HealthIcon extends FlxSprite
 		this.scale.set(1.18, 1.18);
 		if (bopTween != null)
 			bopTween.cancel();
-		bopTween = FlxTween.tween(this.scale, {x: 1, y: 1}, 0.2, {ease: FlxEase.circOut});
+		bopTween = FlxTween.tween(this, {"scale.x ": 1, "scale.y": 1}, 0.2, {ease: FlxEase.circOut});
 	}
 }

@@ -29,7 +29,7 @@ class PreferencesMenu extends ui.OptionsState.Page
 		camera = menuCamera;
 
 		add(items = new TextMenuList());
-		
+
 		createPrefItem('naughtyness', 'censor-naughty');
 		createPrefItem('downscroll', 'downscroll');
 		createPrefItem('flashing menu', 'flashing-menu');
@@ -117,7 +117,7 @@ class PreferencesMenu extends ui.OptionsState.Page
 		daSwap = !daSwap;
 
 		Reflect.setProperty(FlxG.save.data, prefName, daSwap);
-		
+
 		checkboxes[items.selectedIndex].daValue = daSwap;
 
 		switch (prefName)
@@ -168,7 +168,7 @@ class CheckboxThingie extends FlxSprite
 	{
 		super(x, y);
 
-		frames = Paths.getSparrowAtlas('menus/options/checkboxThingie');
+		frames = AssetsHelper.getSparrowAtlas('menus/options/checkboxThingie');
 		animation.addByPrefix('static', 'Check Box unselected', 24, false);
 		animation.addByPrefix('checked', 'Check Box selecting animation', 24, false);
 

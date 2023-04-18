@@ -46,7 +46,7 @@ class InfoObject extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(openfl.utils.Assets.getFont(Paths.font("vcr.ttf")).fontName, 15, 0xFFFFFF);
+		defaultTextFormat = new TextFormat(openfl.utils.Assets.getFont(AssetsHelper.font("vcr.ttf")).fontName, 15, 0xFFFFFF);
 		autoSize = LEFT;
 		visible = true;
 		multiline = true;

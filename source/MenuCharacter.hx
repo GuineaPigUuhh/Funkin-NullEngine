@@ -19,7 +19,7 @@ class MenuCharacter extends FlxSprite
 		originX = x;
 		originY = y;
 
-		frames = Paths.getSparrowAtlas('menus/story_mode/characters/default_chars');
+		frames = AssetsHelper.getSparrowAtlas('menus/story_mode/characters/default_chars');
 
 		antialiasing = true;
 

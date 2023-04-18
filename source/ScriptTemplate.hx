@@ -1,6 +1,5 @@
 package;
 
-import Paths;
 import hscript.*;
 #if sys
 import sys.FileSystem;
@@ -33,7 +32,7 @@ class ScriptTemplate
 
 	public static function getScriptPath(path:String)
 	{
-		var shit = Paths.getPreloadPath('$path.hx');
+		var shit = AssetsHelper.getPreloadPath('$path.hx');
 		return shit;
 	}
 

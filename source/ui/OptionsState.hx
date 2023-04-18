@@ -20,7 +20,7 @@ class OptionsState extends MusicBeatState
 
 	override function create()
 	{
-		var menuBG = new FlxSprite().loadGraphic(Paths.image('menus/main/menuDesat'));
+		var menuBG = new FlxSprite().loadGraphic(AssetsHelper.image('menus/main/menuDesat'));
 		menuBG.color = 0xFFea71fd;
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
@@ -91,7 +91,7 @@ class Page extends FlxGroup
 	public var canExit = true;
 
 	var controls(get, never):Controls;
- 
+
 	inline function get_controls()
 		return PlayerSettings.player1.controls;
 
@@ -119,7 +119,7 @@ class Page extends FlxGroup
 	{
 		if (canExit && controls.BACK)
 		{
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.sound.play(AssetsHelper.sound('cancelMenu'));
 			exit();
 		}
 	}

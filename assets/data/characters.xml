@@ -1,3 +1,4 @@
+<!DOCTYPE nullEngine-char-list>
 <char name="bf-xml" scale="1" flipX="true" antialiasing="true" sprite="characters/BOYFRIEND" icon="bf">
     <anim name="idle" prefix="BF idle dance" fps="24" loop="false" offset="-5,0"/>
     <anim name="singLEFT" prefix="BF NOTE LEFT0" fps="24" loop="false" offset="12,-6"/>

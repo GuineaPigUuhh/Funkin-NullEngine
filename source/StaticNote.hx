@@ -26,7 +26,7 @@ class StaticNote extends FlxSprite
 		switch (PlayState.curStage)
 		{
 			case 'school' | 'schoolEvil':
-				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
+				loadGraphic(AssetsHelper.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
 				animation.add('green', [6]);
 				animation.add('red', [7]);
 				animation.add('blue', [5]);
@@ -57,7 +57,7 @@ class StaticNote extends FlxSprite
 				}
 
 			default:
-				frames = Paths.getSparrowAtlas('NOTE_assets');
+				frames = AssetsHelper.getSparrowAtlas('NOTE_assets');
 				animation.addByPrefix('green', 'arrowUP');
 				animation.addByPrefix('blue', 'arrowDOWN');
 				animation.addByPrefix('purple', 'arrowLEFT');

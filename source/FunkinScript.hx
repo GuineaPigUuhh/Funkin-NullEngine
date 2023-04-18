@@ -89,7 +89,7 @@ class FunkinScript extends ScriptTemplate
 		set('CoolUtil', CoolUtil);
 		set('Character', Character);
 		set('Conductor', Conductor);
-		set('Paths', Paths);
+		set('AssetsHelper', AssetsHelper);
 		set('Settings', Settings);
 	}
 }

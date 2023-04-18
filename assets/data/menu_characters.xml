@@ -1,3 +1,5 @@
+<!DOCTYPE nullEngine-menuChar-list>
+
 <char name="bf" idleAnim="BF idle dance white" confirmAnim="BF HEY!!" scale="0.9" flipX="false" offset="0,20" />
 
 <char name="dad" idleAnim="Dad idle dance BLACK LINE" scale="0.5" flipX="false" offset="100,5" />

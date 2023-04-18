@@ -50,12 +50,12 @@ class MainMenuState extends MusicBeatState
 
 		if (!FlxG.sound.music.playing)
 		{
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			FlxG.sound.playMusic(AssetsHelper.music('freakyMenu'));
 		}
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(Paths.image('menus/main/menuBG'));
+		var bg:FlxSprite = new FlxSprite(AssetsHelper.image('menus/main/menuBG'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0;
 		bg.setGraphicSize(Std.int(bg.width * 1.2));
@@ -67,7 +67,7 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(Paths.image('menus/main/menuDesat'));
+		magenta = new FlxSprite(AssetsHelper.image('menus/main/menuDesat'));
 		magenta.scrollFactor.x = bg.scrollFactor.x;
 		magenta.scrollFactor.y = bg.scrollFactor.y;
 		magenta.setGraphicSize(Std.int(bg.width));
@@ -189,7 +189,7 @@ class MainMenuState extends MusicBeatState
 
 		if (controls.BACK && menuItems.enabled && !menuItems.busy)
 		{
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.sound.play(AssetsHelper.sound('cancelMenu'));
 			FlxG.switchState(new TitleState());
 		}
 
@@ -203,7 +203,7 @@ private class MainMenuList extends MenuTypedList<MainMenuItem>
 
 	public function new()
 	{
-		atlas = Paths.getSparrowAtlas('menus/main/main_menu');
+		atlas = AssetsHelper.getSparrowAtlas('menus/main/main_menu');
 		super(Vertical);
 	}
 

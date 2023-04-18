@@ -35,7 +35,7 @@ class CharactersManager
 
 	public static function load()
 	{
-		charXml = Xml.parse(File.getContent(Paths.xml('characters')));
+		charXml = Xml.parse(File.getContent(AssetsHelper.xml('characters')));
 		for (e in charXml.elementsNamed("char"))
 		{
 			var charData:CharData = {
@@ -145,7 +145,8 @@ class WeeksManager
 
 	public static function load()
 	{
-		weeksXml = Xml.parse(File.getContent(Paths.xml('weeks')));
+		weeksXml = Xml.parse(File.getContent(AssetsHelper.xml('weeks')));
+
 		for (e in weeksXml.elementsNamed('week'))
 		{
 			var songs:Array<String> = [];
@@ -199,7 +200,7 @@ class MenuCharactersManager
 
 	public static function load()
 	{
-		menuCharsXml = Xml.parse(File.getContent(Paths.xml('menu_characters')));
+		menuCharsXml = Xml.parse(File.getContent(AssetsHelper.xml('menu_characters')));
 		for (e in menuCharsXml.elementsNamed('char'))
 		{
 			var menuCharData:MenuCharData = {
@@ -254,7 +255,7 @@ class StagesDataManager
 
 	public static function load()
 	{
-		stagesDataXml = Xml.parse(File.getContent(Paths.xml('stages')));
+		stagesDataXml = Xml.parse(File.getContent(AssetsHelper.xml('stages')));
 		for (e in stagesDataXml.elementsNamed('stageData'))
 		{
 			var stageData:StageData = {
@@ -280,6 +281,7 @@ class StagesDataManager
 
 	public static function reload()
 	{
+		stageList = [];
 		stagesDataMAP = [];
 		load();
 	}

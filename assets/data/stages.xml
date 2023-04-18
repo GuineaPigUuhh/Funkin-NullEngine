@@ -1,3 +1,4 @@
+<!DOCTYPE nullEngine-stage-list>
 <stageData name='stage' camZoom="0.9" camSpeed="1">
     <charPos name="dad" position="100,100"/>
     <charPos name="gf" position="400,130"/>

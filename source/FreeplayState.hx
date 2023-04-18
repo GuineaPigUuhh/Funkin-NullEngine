@@ -47,7 +47,7 @@ class FreeplayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 		{
 			if (!FlxG.sound.music.playing)
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				FlxG.sound.playMusic(AssetsHelper.music('freakyMenu'));
 		}
 
 		for (i in 0...WeeksManager.weekNames.length)
@@ -55,7 +55,7 @@ class FreeplayState extends MusicBeatState
 			addWeek(WeeksManager.weekSongs[i], i, WeeksManager.weekIcons[i], WeeksManager.weekColors[i]);
 		}
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menus/main/menuDesat'));
+		bg = new FlxSprite().loadGraphic(AssetsHelper.image('menus/main/menuDesat'));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -81,7 +81,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		scoreText.setFormat(AssetsHelper.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 
 		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0x99000000);
 		scoreBG.antialiasing = false;
@@ -158,7 +158,7 @@ class FreeplayState extends MusicBeatState
 
 		if (controls.BACK)
 		{
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.sound.play(AssetsHelper.sound('cancelMenu'));
 			FlxG.switchState(new MainMenuState());
 		}
 
@@ -202,7 +202,7 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		FlxG.sound.play(AssetsHelper.sound('scrollMenu'), 0.4);
 
 		curSelected += change;
 

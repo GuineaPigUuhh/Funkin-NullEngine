@@ -52,7 +52,7 @@ class Character extends FlxSprite
 		{
 			case 'gf':
 				// GIRLFRIEND CODE
-				tex = Paths.getSparrowAtlas('characters/GF_assets');
+				tex = AssetsHelper.getSparrowAtlas('characters/GF_assets');
 				frames = tex;
 				quickAnimAdd('cheer', 'GF Cheer');
 				quickAnimAdd('singLEFT', 'GF left note');
@@ -71,7 +71,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 
 			case 'gf-christmas':
-				tex = Paths.getSparrowAtlas('characters/gfChristmas');
+				tex = AssetsHelper.getSparrowAtlas('characters/gfChristmas');
 				frames = tex;
 				quickAnimAdd('cheer', 'GF Cheer');
 				quickAnimAdd('singLEFT', 'GF left note');
@@ -89,7 +89,7 @@ class Character extends FlxSprite
 
 				playAnim('danceRight');
 			case 'gf-tankmen':
-				frames = Paths.getSparrowAtlas('characters/gfTankmen');
+				frames = AssetsHelper.getSparrowAtlas('characters/gfTankmen');
 				animation.addByIndices('sad', 'GF Crying at Gunpoint', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, true);
 				animation.addByIndices('danceLeft', 'GF Dancing at Gunpoint', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 				animation.addByIndices('danceRight', 'GF Dancing at Gunpoint', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
@@ -98,7 +98,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 
 			case 'bf-holding-gf':
-				frames = Paths.getSparrowAtlas('characters/bfAndGF');
+				frames = AssetsHelper.getSparrowAtlas('characters/bfAndGF');
 				quickAnimAdd('idle', 'BF idle dance');
 				quickAnimAdd('singDOWN', 'BF NOTE DOWN0');
 				quickAnimAdd('singLEFT', 'BF NOTE LEFT0');
@@ -118,7 +118,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'gf-car':
-				tex = Paths.getSparrowAtlas('characters/gfCar');
+				tex = AssetsHelper.getSparrowAtlas('characters/gfCar');
 				frames = tex;
 				animation.addByIndices('singUP', 'GF Dancing Beat Hair blowing CAR', [0], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing Beat Hair blowing CAR', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
@@ -131,7 +131,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 
 			case 'gf-pixel':
-				tex = Paths.getSparrowAtlas('characters/gfPixel');
+				tex = AssetsHelper.getSparrowAtlas('characters/gfPixel');
 				frames = tex;
 				animation.addByIndices('singUP', 'GF IDLE', [2], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF IDLE', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
@@ -147,7 +147,7 @@ class Character extends FlxSprite
 
 			case 'dad':
 				// DAD ANIMATION LOADING CODE
-				tex = Paths.getSparrowAtlas('characters/DADDY_DEAREST');
+				tex = AssetsHelper.getSparrowAtlas('characters/DADDY_DEAREST');
 				frames = tex;
 				quickAnimAdd('idle', 'Dad idle dance');
 				quickAnimAdd('singUP', 'Dad Sing Note UP');
@@ -159,7 +159,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'spooky':
-				tex = Paths.getSparrowAtlas('characters/spooky_kids_assets');
+				tex = AssetsHelper.getSparrowAtlas('characters/spooky_kids_assets');
 				frames = tex;
 				quickAnimAdd('singUP', 'spooky UP NOTE');
 				quickAnimAdd('singDOWN', 'spooky DOWN note');
@@ -172,7 +172,7 @@ class Character extends FlxSprite
 
 				playAnim('danceRight');
 			case 'mom':
-				tex = Paths.getSparrowAtlas('characters/Mom_Assets');
+				tex = AssetsHelper.getSparrowAtlas('characters/Mom_Assets');
 				frames = tex;
 
 				quickAnimAdd('idle', "Mom Idle");
@@ -188,7 +188,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 			case 'mom-car':
-				tex = Paths.getSparrowAtlas('characters/momCar');
+				tex = AssetsHelper.getSparrowAtlas('characters/momCar');
 				frames = tex;
 
 				quickAnimAdd('idle', "Mom Idle");
@@ -204,7 +204,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'monster':
-				tex = Paths.getSparrowAtlas('characters/Monster_Assets');
+				tex = AssetsHelper.getSparrowAtlas('characters/Monster_Assets');
 				frames = tex;
 				quickAnimAdd('idle', 'monster idle');
 				quickAnimAdd('singUP', 'monster up note');
@@ -216,7 +216,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'monster-christmas':
-				tex = Paths.getSparrowAtlas('characters/monsterChristmas');
+				tex = AssetsHelper.getSparrowAtlas('characters/monsterChristmas');
 				frames = tex;
 				quickAnimAdd('idle', 'monster idle');
 				quickAnimAdd('singUP', 'monster up note');
@@ -228,7 +228,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'pico':
-				tex = Paths.getSparrowAtlas('characters/Pico_FNF_assetss');
+				tex = AssetsHelper.getSparrowAtlas('characters/Pico_FNF_assetss');
 				frames = tex;
 				quickAnimAdd('idle', "Pico Idle Dance");
 				quickAnimAdd('singUP', 'pico Up note0');
@@ -259,7 +259,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'pico-speaker':
-				frames = Paths.getSparrowAtlas('characters/picoSpeaker');
+				frames = AssetsHelper.getSparrowAtlas('characters/picoSpeaker');
 
 				quickAnimAdd('shoot1', "Pico shoot 1");
 				quickAnimAdd('shoot2', "Pico shoot 2");
@@ -273,7 +273,7 @@ class Character extends FlxSprite
 				loadMappedAnims();
 
 			case 'bf':
-				var tex = Paths.getSparrowAtlas('characters/BOYFRIEND');
+				var tex = AssetsHelper.getSparrowAtlas('characters/BOYFRIEND');
 				frames = tex;
 				quickAnimAdd('idle', 'BF idle dance');
 				quickAnimAdd('singUP', 'BF NOTE UP0');
@@ -301,7 +301,7 @@ class Character extends FlxSprite
 				loadOffsetFile(curCharacter);
 
 			case 'bf-christmas':
-				var tex = Paths.getSparrowAtlas('characters/bfChristmas');
+				var tex = AssetsHelper.getSparrowAtlas('characters/bfChristmas');
 				frames = tex;
 				quickAnimAdd('idle', 'BF idle dance');
 				quickAnimAdd('singUP', 'BF NOTE UP0');
@@ -320,7 +320,7 @@ class Character extends FlxSprite
 
 				flipX = true;
 			case 'bf-car':
-				var tex = Paths.getSparrowAtlas('characters/bfCar');
+				var tex = AssetsHelper.getSparrowAtlas('characters/bfCar');
 				frames = tex;
 				quickAnimAdd('idle', 'BF idle dance');
 				quickAnimAdd('singUP', 'BF NOTE UP0');
@@ -339,7 +339,7 @@ class Character extends FlxSprite
 
 				flipX = true;
 			case 'bf-pixel':
-				frames = Paths.getSparrowAtlas('characters/bfPixel');
+				frames = AssetsHelper.getSparrowAtlas('characters/bfPixel');
 				quickAnimAdd('idle', 'BF IDLE');
 				quickAnimAdd('singUP', 'BF UP NOTE');
 				quickAnimAdd('singLEFT', 'BF LEFT NOTE');
@@ -364,7 +364,7 @@ class Character extends FlxSprite
 
 				flipX = true;
 			case 'bf-pixel-dead':
-				frames = Paths.getSparrowAtlas('characters/bfPixelsDEAD');
+				frames = AssetsHelper.getSparrowAtlas('characters/bfPixelsDEAD');
 				quickAnimAdd('singUP', "BF Dies pixel");
 				quickAnimAdd('firstDeath', "BF Dies pixel");
 				animation.addByPrefix('deathLoop', "Retry Loop", 24, true);
@@ -381,7 +381,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'bf-holding-gf-dead':
-				frames = Paths.getSparrowAtlas('characters/bfHoldingGF-DEAD');
+				frames = AssetsHelper.getSparrowAtlas('characters/bfHoldingGF-DEAD');
 				quickAnimAdd('singUP', 'BF Dead with GF Loop');
 				quickAnimAdd('firstDeath', 'BF Dies with GF');
 				animation.addByPrefix('deathLoop', 'BF Dead with GF Loop', 24, true);
@@ -394,7 +394,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'senpai':
-				frames = Paths.getSparrowAtlas('characters/senpai');
+				frames = AssetsHelper.getSparrowAtlas('characters/senpai');
 				quickAnimAdd('idle', 'Senpai Idle');
 				// at framerate 16.8 animation plays over 2 beats at 144bpm,
 				// but if the game lags or the bpm is > 144 (mods etc.)
@@ -415,7 +415,7 @@ class Character extends FlxSprite
 
 				antialiasing = false;
 			case 'senpai-angry':
-				frames = Paths.getSparrowAtlas('characters/senpai');
+				frames = AssetsHelper.getSparrowAtlas('characters/senpai');
 				quickAnimAdd('idle', 'Angry Senpai Idle');
 				quickAnimAdd('singUP', 'Angry Senpai UP NOTE');
 				quickAnimAdd('singLEFT', 'Angry Senpai LEFT NOTE');
@@ -432,7 +432,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'spirit':
-				frames = Paths.getPackerAtlas('characters/spirit');
+				frames = AssetsHelper.getPackerAtlas('characters/spirit');
 				quickAnimAdd('idle', "idle spirit_");
 				quickAnimAdd('singUP', "up_");
 				quickAnimAdd('singRIGHT', "right_");
@@ -449,7 +449,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'parents-christmas':
-				frames = Paths.getSparrowAtlas('characters/mom_dad_christmas_assets');
+				frames = AssetsHelper.getSparrowAtlas('characters/mom_dad_christmas_assets');
 				quickAnimAdd('idle', 'Parent Christmas Idle');
 				quickAnimAdd('singUP', 'Parent Up Note Dad');
 				quickAnimAdd('singDOWN', 'Parent Down Note Dad');
@@ -466,7 +466,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'tankman':
-				frames = Paths.getSparrowAtlas('characters/tankmanCaptain');
+				frames = AssetsHelper.getSparrowAtlas('characters/tankmanCaptain');
 
 				quickAnimAdd('idle', "Tankman Idle Dance");
 
@@ -536,7 +536,7 @@ class Character extends FlxSprite
 	{
 		var customChar = CharactersManager.charsMAP.get(char);
 
-		frames = Paths.getSparrowAtlas(customChar.sprite);
+		frames = AssetsHelper.getSparrowAtlas(customChar.sprite);
 
 		flipX = customChar.flipX;
 		antialiasing = customChar.antialiasing;
@@ -593,7 +593,7 @@ class Character extends FlxSprite
 
 	private function loadOffsetFile(offsetCharacter:String)
 	{
-		var daFile:Array<String> = CoolUtil.coolTextFile(Paths.file("images/characters/" + offsetCharacter + "Offsets.txt"));
+		var daFile:Array<String> = CoolUtil.coolTextFile(AssetsHelper.getFilePath("images/characters/" + offsetCharacter + "Offsets", TEXT));
 
 		for (i in daFile)
 		{
