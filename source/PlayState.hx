@@ -151,6 +151,7 @@ class PlayState extends MusicBeatState
 	var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
 	public static var campaignScore:Int = 0;
+	public static var campaignMisses:Int = 0;
 
 	var defaultCamZoom:Float = 1.05;
 
@@ -260,7 +261,6 @@ class PlayState extends MusicBeatState
 
 		var stageData = StagesDataManager.stagesDataMAP.get(curStage);
 		var getCharsPos = stageData.charsPos;
-
 		if (stageData.camZoom != 1.05)
 			defaultCamZoom = stageData.camZoom;
 
@@ -771,16 +771,16 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF002B, 0xFF15FF00);
 		add(healthBar);
+		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 35, 0, "", 18);
-		scoreTxt.setFormat(AssetsHelper.font("vcr.ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(AssetsHelper.font("vcr", "ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.borderSize = 2;
 		scoreTxt.scrollFactor.set();
 
 		timeTxt = new FlxText(-20, FlxG.height * 0.9 + 34, FlxG.width, '0:00${divider}0:00', 26);
-		timeTxt.setFormat(AssetsHelper.font("vcr.ttf"), 26, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(AssetsHelper.font("vcr", "ttf"), 26, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.borderSize = 2.2;
 		timeTxt.scrollFactor.set();
 		if (PreferencesMenu.getPref('downscroll'))
@@ -788,7 +788,7 @@ class PlayState extends MusicBeatState
 		add(timeTxt);
 
 		songInfoTxt = new FlxText(timeTxt.x, timeTxt.y - 22, FlxG.width, SONG.song + divider + storyDifficultyText, 18);
-		songInfoTxt.setFormat(AssetsHelper.font("vcr.ttf"), 18, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songInfoTxt.setFormat(AssetsHelper.font("vcr", "ttf"), 18, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songInfoTxt.scrollFactor.set();
 		songInfoTxt.borderSize = 2;
 		add(songInfoTxt);
@@ -1711,6 +1711,7 @@ class PlayState extends MusicBeatState
 		if (isStoryMode)
 		{
 			campaignScore += songScore;
+			campaignMisses += songMisses;
 
 			storyPlaylist.remove(storyPlaylist[0]);
 
@@ -2203,11 +2204,17 @@ class PlayState extends MusicBeatState
 
 	function updateScoreText()
 	{
-		scoreTxt.text = "Score: " + songScore + divider;
-		scoreTxt.text += "Misses: " + songMisses + divider;
-		scoreTxt.text += "Accuracy: " + truncateFloat(songAccuracy, 2) + "%";
+		scoreTxt.text = 'Score: $songScore' + (isStoryMode ? ' ($campaignScore)' : '') + divider;
+		scoreTxt.text += 'Misses: $songMisses' + (isStoryMode ? ' ($campaignMisses)' : '') + divider;
+		scoreTxt.text += 'Accuracy: ${truncateFloat(songAccuracy, 2)}%';
 
 		scoreTxt.screenCenter(X);
+	}
+
+	function reloadHealthBarColors()
+	{
+		// healthBar.createFilledBar(0xFFFF002B, 0xFF15FF00);
+		healthBar.createFilledBar(dad.getCharColor(), boyfriend.getCharColor());
 	}
 
 	var fastCarCanDrive:Bool = true;

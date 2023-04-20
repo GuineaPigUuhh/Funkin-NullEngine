@@ -32,7 +32,7 @@ class Script
 
 	public static function getScriptPath(path:String)
 	{
-		var shit = AssetsHelper.getPreloadPath('$path.hx');
+		var shit = AssetsHelper.getDefaultPath('$path.hx');
 		return shit;
 	}
 

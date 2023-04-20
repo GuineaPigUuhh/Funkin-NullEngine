@@ -81,7 +81,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		scoreText.setFormat(AssetsHelper.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		scoreText.setFormat(AssetsHelper.font("vcr", "ttf"), 32, FlxColor.WHITE, RIGHT);
 
 		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0x99000000);
 		scoreBG.antialiasing = false;

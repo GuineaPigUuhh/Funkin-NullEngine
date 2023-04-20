@@ -56,27 +56,27 @@ class PauseSubState extends MusicBeatSubstate
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
-		levelInfo.setFormat(AssetsHelper.font("vcr.ttf"), 32);
+		levelInfo.setFormat(AssetsHelper.font("vcr", "ttf"), 32);
 		levelInfo.updateHitbox();
 		add(levelInfo);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
 		levelDifficulty.text += CoolUtil.difficultyString(PlayState.storyDifficulty);
 		levelDifficulty.scrollFactor.set();
-		levelDifficulty.setFormat(AssetsHelper.font('vcr.ttf'), 32);
+		levelDifficulty.setFormat(AssetsHelper.font('vcr', "ttf"), 32);
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
 		var deathCounter:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
 		deathCounter.text = "Blue balled: " + PlayState.deathCounter;
 		deathCounter.scrollFactor.set();
-		deathCounter.setFormat(AssetsHelper.font('vcr.ttf'), 32);
+		deathCounter.setFormat(AssetsHelper.font('vcr', "ttf"), 32);
 		deathCounter.updateHitbox();
 		add(deathCounter);
 
 		practiceText = new FlxText(20, 15 + 64 + 32, 0, "PRACTICE MODE", 32);
 		practiceText.scrollFactor.set();
-		practiceText.setFormat(AssetsHelper.font('vcr.ttf'), 32);
+		practiceText.setFormat(AssetsHelper.font('vcr', "ttf"), 32);
 		practiceText.updateHitbox();
 		practiceText.x = FlxG.width - (practiceText.width + 20);
 		practiceText.visible = PlayState.practiceMode;

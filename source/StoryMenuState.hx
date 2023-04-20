@@ -73,7 +73,7 @@ class StoryMenuState extends MusicBeatState
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(AssetsHelper.font("vcr.ttf"), 32);
+		rankText.setFormat(AssetsHelper.font("vcr", "ttf"), 32);
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
@@ -268,7 +268,10 @@ class StoryMenuState extends MusicBeatState
 
 			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
 			PlayState.storyWeek = curWeek;
+
 			PlayState.campaignScore = 0;
+			PlayState.campaignMisses = 0;
+
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				LoadingState.loadAndSwitchState(new PlayState(), true);

@@ -32,9 +32,20 @@ class CharactersManager
 {
 	public static var charXml:Xml;
 	public static var charsMAP:Map<String, CharData> = [];
+	public static var charList:Array<String> = [];
+
+	static var vanillaChars:Array<String> = [
+		"bf", "dad", "gf", "spooky", "pico", "mom", "mom-car", "bf-car", "parents-christmas", "monster-christmas", "bf-christmas", "gf-christmas", "monster",
+		"bf-pixel", "senpai", "senpai-angry", "spirit", "tankman", "pico-speaker", "bf-holding-gf"
+	]; // Only use this if your character is from Source Code
 
 	public static function load()
 	{
+		for (char in vanillaChars)
+		{
+			charList.push(char);
+		}
+
 		charXml = Xml.parse(File.getContent(AssetsHelper.xml('characters')));
 		for (e in charXml.elementsNamed("char"))
 		{
@@ -43,6 +54,7 @@ class CharactersManager
 				isGF: false,
 				antialiasing: true,
 				icon: "bf",
+				color: "A1A1A1",
 				scale: 1,
 				sprite: "characters/BOYFRIEND",
 				anims: []
@@ -65,6 +77,9 @@ class CharactersManager
 
 			if (e.exists("scale"))
 				charData.scale = Std.parseFloat(e.get("scale"));
+
+			if (e.exists("color"))
+				charData.color = e.get("color");
 
 			if (e.exists("isGF"))
 				charData.isGF = XmlUtil.parseBool(e.get("isGF"));
@@ -97,6 +112,7 @@ class CharactersManager
 				charData.anims.push(animData);
 			}
 
+			charList.push(e.get("name"));
 			charsMAP.set(e.get("name"), charData);
 		}
 	}
@@ -104,6 +120,7 @@ class CharactersManager
 	public static function reload()
 	{
 		charsMAP = [];
+		charList = [];
 		load();
 	}
 }
@@ -113,6 +130,7 @@ typedef CharData =
 	var flipX:Bool;
 	var antialiasing:Bool;
 	var icon:String;
+	var color:String;
 	var sprite:String;
 	var isGF:Bool;
 	var scale:Float;

@@ -53,12 +53,23 @@ class HealthIcon extends FlxSprite
 	}
 
 	var bopTween:FlxTween = null;
+	var saveScale:Array<Float> = [];
+	var noMoreSaveScale:Bool = false;
 
 	public function bop()
 	{
-		this.scale.set(1.18, 1.18);
+		if (noMoreSaveScale == false)
+		{
+			saveScale.push(this.scale.x);
+			saveScale.push(this.scale.y);
+
+			noMoreSaveScale = true;
+		}
+
+		this.scale.set(saveScale[0] + 0.2, saveScale[1] + 0.2);
+
 		if (bopTween != null)
 			bopTween.cancel();
-		bopTween = FlxTween.tween(this, {"scale.x ": 1, "scale.y": 1}, 0.2, {ease: FlxEase.circOut});
+		bopTween = FlxTween.tween(this, {"scale.x": saveScale[0], "scale.y": saveScale[1]}, 0.2, {ease: FlxEase.circOut});
 	}
 }

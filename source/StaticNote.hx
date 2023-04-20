@@ -20,9 +20,6 @@ class StaticNote extends FlxSprite
 		this.player = player;
 
 		var colorswap:ColorSwap = new ColorSwap();
-		shader = colorswap.shader;
-		colorswap.update(Note.arrowColors[noteData]);
-
 		switch (PlayState.curStage)
 		{
 			case 'school' | 'schoolEvil':
@@ -86,6 +83,8 @@ class StaticNote extends FlxSprite
 						animation.addByPrefix('confirm', 'right confirm', 24, false);
 				}
 		}
+		shader = colorswap.shader;
+		colorswap.update(Note.arrowColors[noteData]);
 
 		updateHitbox();
 		scrollFactor.set();

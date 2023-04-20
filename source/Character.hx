@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import haxe.io.Path;
 
@@ -31,6 +32,7 @@ class Character extends FlxSprite
 	public var charOffset:Array<Float> = [0, 0];
 
 	public var isGF:Bool = false;
+	public var charColor:String = "A1A1A1"; // this is used in the trail and the health bar
 
 	public var holdTimer:Float = 0;
 
@@ -46,6 +48,29 @@ class Character extends FlxSprite
 
 		var tex:FlxAtlasFrames;
 		antialiasing = true;
+
+		var charColorsMAP:Map<String, String> = [
+			"bf" => "31B0D1",
+			"bf-car" => "31B0D1",
+			"bf-christmas" => "31B0D1",
+			"bf-holding-gf" => "31B0D1",
+			"bf-pixel" => "7BD6F6",
+			"dad" => "AF66CE",
+			"gf" => "A5004D",
+			"mom" => "D8558E",
+			"mom-car" => "D8558E",
+			"monster" => "F3FF6E",
+			"monster-christmas" => "F3FF6E",
+			"parents-christmas" => "CD599E",
+			"pico" => "B7D855",
+			"senpai" => "FFAA6F",
+			"senpai-angry" => "FFAA6F",
+			"spirit" => "FF3C6E",
+			"spooky" => "D57E00",
+			"tankman" => "FF851C"
+		];
+		if (charColorsMAP.exists(curCharacter))
+			charColor = charColorsMAP.get(curCharacter);
 
 		icon = curCharacter;
 		switch (curCharacter)
@@ -541,6 +566,7 @@ class Character extends FlxSprite
 		flipX = customChar.flipX;
 		antialiasing = customChar.antialiasing;
 		icon = customChar.icon;
+		charColor = customChar.color;
 		isGF = customChar.isGF;
 
 		if (customChar.scale != 1)
@@ -560,6 +586,11 @@ class Character extends FlxSprite
 
 			addOffset(e.name, e.offset[0], e.offset[1]);
 		}
+	}
+
+	public inline function getCharColor()
+	{
+		return FlxColor.fromString('#' + charColor);
 	}
 
 	public function loadMappedAnims()

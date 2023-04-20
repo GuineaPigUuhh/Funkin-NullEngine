@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
+import sys.FileSystem;
 
 @:enum abstract FileType(String)
 {
@@ -26,7 +27,7 @@ class AssetsHelper
 		if (library != null)
 			return getLibraryPath(file, library);
 
-		return getPreloadPath(file);
+		return getDefaultPath(file);
 	}
 
 	inline static public function getFilePath(file:String, type:FileType = NULL, ?library:String):String
@@ -40,12 +41,21 @@ class AssetsHelper
 
 	inline static public function getLibraryPath(file:String, library:String):String
 	{
-		return '$library/$file';
+		return 'assets/$library/$file';
 	}
 
-	inline static public function getPreloadPath(file:String):String
+	inline static public function getDefaultPath(file:String):String
 	{
-		return 'assets/$file';
+		return 'assets/funkin/$file';
+	}
+
+	public static function fileExists(file:String, ?library:String):Bool // ONLY BOOL
+	{
+		if (FileSystem.exists(file))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	inline static public function image(file:String, ?library:String):String
@@ -68,9 +78,9 @@ class AssetsHelper
 		return getFilePath('data/' + file, JSON, library);
 	}
 
-	inline static public function font(file:String)
+	inline static public function font(file:String, extShit:String)
 	{
-		return getFilePath('fonts/' + file, NULL);
+		return getFilePath('fonts/' + file + '.$extShit', NULL);
 	}
 
 	inline static public function video(file:String)

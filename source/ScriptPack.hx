@@ -9,7 +9,7 @@ class ScriptPack
 
 	public function new(folder:String)
 	{
-		var betterFolder = AssetsHelper.getPreloadPath(folder);
+		var betterFolder = AssetsHelper.getDefaultPath(folder);
 		if (FileSystem.exists(betterFolder))
 		{
 			var filesLoads:Array<String> = [];
