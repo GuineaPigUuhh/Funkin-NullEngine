@@ -61,7 +61,7 @@
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
 
-	<haxelib name="hxCodec" if="desktop || android" 
+	<haxelib name="hxCodec" if="desktop || android" />
 	<haxelib name="flxanimate"/>
 	
 	<!--In case you want to use the ui package-->
