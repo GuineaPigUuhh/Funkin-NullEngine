@@ -30,6 +30,10 @@ class Note extends FlxSprite
 
 	public var altNote:Bool = false;
 	public var invisNote:Bool = false;
+	public var gfNote:Bool = false;
+	public var ignoreNote:Bool = false;
+
+	public var noteType(default, set):String = "default";
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -220,5 +224,21 @@ class Note extends FlxSprite
 			if (alpha > 0.3)
 				alpha = 0.3;
 		}
+	}
+
+	private function set_noteType(value:String):String
+	{
+		if (noteData > -1 && noteType != value)
+		{
+			switch (value)
+			{
+				case "altNote":
+					altNote = true;
+				case "gfNote":
+					gfNote = true;
+			}
+			noteType = value;
+		}
+		return value;
 	}
 }

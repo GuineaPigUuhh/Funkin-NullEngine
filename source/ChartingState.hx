@@ -737,6 +737,8 @@ class ChartingState extends MusicBeatState
 			}
 			else
 				curSelectedNote[3] = true;
+
+			trace("Alt Note: " + curSelectedNote[3]);
 		}
 	}
 
@@ -889,19 +891,6 @@ class ChartingState extends MusicBeatState
 					daBPM = _song.notes[i].bpm;
 			Conductor.changeBPM(daBPM);
 		}
-
-		/* // PORT BULLSHIT, INCASE THERE'S NO SUSTAIN DATA FOR A NOTE
-			for (sec in 0..._song.notes.length)
-			{
-				for (notesse in 0..._song.notes[sec].sectionNotes.length)
-				{
-					if (_song.notes[sec].sectionNotes[notesse][2] == null)
-					{
-						_song.notes[sec].sectionNotes[notesse][2] = 0;
-					}
-				}
-			}
-		 */
 
 		for (i in sectionInfo)
 		{

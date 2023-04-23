@@ -1082,7 +1082,11 @@ class PlayState extends MusicBeatState
 		{
 			// this just based on beatHit stuff but compact
 			if (swagCounter % gfSpeed == 0)
-				gf.dance();
+			{
+				if (!gf.animation.curAnim.name.startsWith("sing"))
+					gf.dance();
+			}
+
 			if (swagCounter % 2 == 0)
 			{
 				if (!boyfriend.animation.curAnim.name.startsWith("sing"))
@@ -2129,7 +2133,10 @@ class PlayState extends MusicBeatState
 
 			totalNotesHits++;
 
-			boyfriend.playSingAnim(daNote.noteData);
+			if (daNote.gfNote)
+				gf.playSingAnim(daNote.noteData);
+			else
+				boyfriend.playSingAnim(daNote.noteData);
 
 			playerStrums.forEach(function(spr:StaticNote)
 			{
@@ -2168,7 +2175,11 @@ class PlayState extends MusicBeatState
 		if (daNote.altNote)
 			altAnim = '-alt';
 
-		dad.playSingAnim(daNote.noteData);
+		if (daNote.gfNote)
+			gf.playSingAnim(daNote.noteData, altAnim);
+		else
+			dad.playSingAnim(daNote.noteData, altAnim);
+
 		opponentStrums.forEach(function(spr:StaticNote)
 		{
 			if (Math.abs(daNote.noteData) == spr.ID)
@@ -2334,6 +2345,28 @@ class PlayState extends MusicBeatState
 		scriptsCall("onStepHit", []);
 	}
 
+	function charsDance()
+	{
+		if (curBeat % gfSpeed == 0)
+		{
+			if (!gf.animation.curAnim.name.startsWith("sing"))
+				gf.dance();
+		}
+
+		if (curBeat % 2 == 0)
+		{
+			if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+				boyfriend.playAnim('idle');
+			if (!dad.animation.curAnim.name.startsWith("sing"))
+				dad.dance();
+		}
+		else if (dad.curCharacter == 'spooky')
+		{
+			if (!dad.animation.curAnim.name.startsWith("sing"))
+				dad.dance();
+		}
+	}
+
 	var lightningStrikeBeat:Int = 0;
 	var lightningOffset:Int = 8;
 
@@ -2376,21 +2409,7 @@ class PlayState extends MusicBeatState
 		iconP1.bop();
 		iconP2.bop();
 
-		if (curBeat % gfSpeed == 0)
-			gf.dance();
-
-		if (curBeat % 2 == 0)
-		{
-			if (!boyfriend.animation.curAnim.name.startsWith("sing"))
-				boyfriend.playAnim('idle');
-			if (!dad.animation.curAnim.name.startsWith("sing"))
-				dad.dance();
-		}
-		else if (dad.curCharacter == 'spooky')
-		{
-			if (!dad.animation.curAnim.name.startsWith("sing"))
-				dad.dance();
-		}
+		charsDance();
 
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
