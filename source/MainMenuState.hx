@@ -55,13 +55,8 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(AssetsHelper.image('menus/main/menuBG'));
-		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0;
-		bg.setGraphicSize(Std.int(bg.width * 1.2));
-		bg.updateHitbox();
-		bg.screenCenter();
-		bg.antialiasing = true;
+		var bg:FlxSprite = new FlxSprite().loadGraphic(AssetsHelper.image('menus/main/menuBG'));
+		bg.scrollFactor.set();
 		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -70,12 +65,10 @@ class MainMenuState extends MusicBeatState
 		magenta = new FlxSprite(AssetsHelper.image('menus/main/menuDesat'));
 		magenta.scrollFactor.x = bg.scrollFactor.x;
 		magenta.scrollFactor.y = bg.scrollFactor.y;
-		magenta.setGraphicSize(Std.int(bg.width));
 		magenta.updateHitbox();
 		magenta.x = bg.x;
 		magenta.y = bg.y;
 		magenta.visible = false;
-		magenta.antialiasing = true;
 		magenta.color = 0xFFfd719b;
 		if (PreferencesMenu.preferences.get('flashing-menu'))
 			add(magenta);
@@ -178,6 +171,11 @@ class MainMenuState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		// FlxG.camera.followLerp = CoolUtil.camLerpShit(0.06);
+
+		if (FlxG.keys.justPressed.SEVEN)
+		{
+			FlxG.switchState(new DevTools());
+		}
 
 		if (FlxG.sound.music.volume < 0.8)
 		{

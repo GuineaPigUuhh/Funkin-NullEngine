@@ -177,6 +177,8 @@ class PlayState extends MusicBeatState
 	var global_scripts:ScriptPack;
 	var song_scripts:ScriptPack;
 
+	var customStage:CustomStage;
+
 	override public function create()
 	{
 		game = this;
@@ -587,6 +589,9 @@ class PlayState extends MusicBeatState
 				stageCurtains.active = false;
 
 				add(stageCurtains);
+
+			default:
+				customStage = new CustomStage(curStage);
 		}
 
 		var gfVersion:String = 'gf';

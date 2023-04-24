@@ -68,6 +68,11 @@ class AssetsHelper
 		return getFilePath('data/' + file, TEXT, library);
 	}
 
+	inline static public function hscript(file:String, ?library:String):String
+	{
+		return getFilePath('data/' + file, HSCRIPT, library);
+	}
+
 	inline static public function xml(file:String, ?library:String)
 	{
 		return getFilePath('data/' + file, XML, library);
