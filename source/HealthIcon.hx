@@ -57,6 +57,7 @@ class HealthIcon extends FlxSprite
 	{
 		super.update(elapsed);
 
+		updateHitbox();
 		if (sprTracker != null)
 			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
 	}
@@ -76,6 +77,7 @@ class HealthIcon extends FlxSprite
 		}
 
 		this.scale.set(saveScale[0] + 0.2, saveScale[1] + 0.2);
+		updateHitbox();
 
 		if (bopTween != null)
 			bopTween.cancel();

@@ -36,7 +36,6 @@ class MainMenuState extends MusicBeatState
 	var menuItems:MainMenuList;
 
 	var magenta:FlxSprite;
-	var camFollow:FlxObject;
 
 	override function create()
 	{
@@ -59,9 +58,6 @@ class MainMenuState extends MusicBeatState
 		bg.scrollFactor.set();
 		add(bg);
 
-		camFollow = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
-
 		magenta = new FlxSprite(AssetsHelper.image('menus/main/menuDesat'));
 		magenta.scrollFactor.x = bg.scrollFactor.x;
 		magenta.scrollFactor.y = bg.scrollFactor.y;
@@ -82,7 +78,7 @@ class MainMenuState extends MusicBeatState
 			FlxFlicker.flicker(magenta, 1.1, 0.15, false, true);
 		});
 
-		menuItems.enabled = false; // disable for intro
+		menuItems.enabled = true;
 		menuItems.createItem('story mode', function() startExitState(new StoryMenuState()));
 		menuItems.createItem('freeplay', function() startExitState(new FreeplayState()));
 		#if CAN_OPEN_LINKS
@@ -102,7 +98,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.cameras.reset(new SwagCamera());
-		FlxG.camera.follow(camFollow, null, 0.06);
 
 		super.create();
 	}
@@ -110,13 +105,11 @@ class MainMenuState extends MusicBeatState
 	override function finishTransIn()
 	{
 		super.finishTransIn();
-
-		menuItems.enabled = true;
 	}
 
 	function onMenuItemChange(selected:MenuItem)
 	{
-		camFollow.setPosition(selected.getGraphicMidpoint().x, selected.getGraphicMidpoint().y);
+		FlxG.camera.follow(selected, null, 0.1);
 	}
 
 	#if CAN_OPEN_LINKS
@@ -226,7 +219,7 @@ private class MainMenuItem extends AtlasMenuItem
 	public function new(x = 0.0, y = 0.0, name, atlas, callback)
 	{
 		super(x, y, name, atlas, callback);
-		scrollFactor.set(0, 0);
+		scrollFactor.set(0, 0.5);
 	}
 
 	override function changeAnim(anim:String)

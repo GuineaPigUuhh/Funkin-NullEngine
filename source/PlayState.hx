@@ -976,6 +976,9 @@ class PlayState extends MusicBeatState
 
 			pack.set('health', health);
 			pack.set('inCutscene', inCutscene);
+			pack.set('endingSong', endingSong);
+			pack.set('startingSong', startingSong);
+			pack.set('generatedMusic', generatedMusic);
 
 			pack.set('camHUD', camHUD);
 			pack.set('camGame', camGame);
@@ -1131,6 +1134,7 @@ class PlayState extends MusicBeatState
 
 			swagCounter += 1;
 		}, 4);
+		scriptsCall("onStartCountdown", [swagCounter]);
 	}
 
 	function readySetGo(path:String):Void
@@ -1174,6 +1178,7 @@ class PlayState extends MusicBeatState
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC, true, songLength);
 		#end
+		scriptsCall("onStartSong", []);
 	}
 
 	private function generateSong():Void
@@ -1661,7 +1666,7 @@ class PlayState extends MusicBeatState
 				{
 					if (daNote.mustPress && daNote.tooLate)
 					{
-						noteMiss(daNote.noteData);
+						noteMiss(daNote);
 					}
 
 					daNote.active = false;
@@ -1796,6 +1801,7 @@ class PlayState extends MusicBeatState
 		{
 			FlxG.switchState(new FreeplayState());
 		}
+		scriptsCall("onEndSong", []);
 	}
 
 	// gives score and pops up rating
@@ -2080,7 +2086,7 @@ class PlayState extends MusicBeatState
 				for (shit in 0...pressArray.length)
 				{ // if a direction is hit that shouldn't be
 					if (pressArray[shit] && !directionList.contains(shit))
-						noteMiss(shit);
+						forceMiss(shit);
 				}
 				for (coolNote in possibleNotes)
 				{
@@ -2092,7 +2098,7 @@ class PlayState extends MusicBeatState
 			{
 				for (shit in 0...pressArray.length)
 					if (pressArray[shit])
-						noteMiss(shit);
+						forceMiss(shit);
 			}
 		}
 
@@ -2113,7 +2119,7 @@ class PlayState extends MusicBeatState
 		});
 	}
 
-	function noteMiss(direction:Int = 1):Void
+	function noteMiss(note:Note, ?forced:Bool = false):Void
 	{
 		health -= 0.04;
 		killCombo();
@@ -2128,7 +2134,18 @@ class PlayState extends MusicBeatState
 		updateAccuracy();
 		updateScoreText();
 
-		boyfriend.playSingAnim(direction, "miss");
+		boyfriend.playSingAnim(note.noteData, "miss");
+
+		if (forced == false)
+			scriptsCall("onPlayerMiss", [elapsed]);
+	}
+
+	function forceMiss(dir)
+	{
+		var daFake:Note = new Note(0, dir, null, false);
+		noteMiss(daFake, true);
+
+		scriptsCall("onPlayerForceMiss", [elapsed]);
 	}
 
 	function goodNoteHit(daNote:Note):Void

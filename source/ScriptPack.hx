@@ -3,6 +3,8 @@ package;
 import sys.FileSystem;
 import sys.io.File;
 
+using StringTools;
+
 class ScriptPack
 {
 	var scripts:Array<FunkinScript> = [];
@@ -15,10 +17,13 @@ class ScriptPack
 			var filesLoads:Array<String> = [];
 			for (file in FileSystem.readDirectory(betterFolder))
 			{
-				if (!filesLoads.contains(file))
+				if (file.endsWith(".hx"))
 				{
-					filesLoads.push(file);
-					scripts.push(new FunkinScript(betterFolder + file));
+					if (!filesLoads.contains(file))
+					{
+						filesLoads.push(file);
+						scripts.push(new FunkinScript(betterFolder + file));
+					}
 				}
 			}
 		}
