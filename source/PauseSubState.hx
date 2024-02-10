@@ -178,12 +178,6 @@ class PauseSubState extends MusicBeatSubstate
 						FlxG.switchState(new FreeplayState());
 			}
 		}
-
-		if (FlxG.keys.justPressed.J)
-		{
-			// for reference later!
-			// PlayerSettings.player1.controls.replaceBinding(Control.LEFT, Keys, FlxKey.J, null);
-		}
 	}
 
 	override function destroy()

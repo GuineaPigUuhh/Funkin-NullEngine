@@ -49,6 +49,8 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		WeeksManager.load();
+
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
 

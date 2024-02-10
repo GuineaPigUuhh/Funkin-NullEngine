@@ -1,0 +1,7 @@
+{
+    "idleAnim": "Pico Idle Dance",
+    "confirmAnim": "Idle",
+    "scale": 0.5,
+    "offset": [77, 135],
+    "flipX": true
+}

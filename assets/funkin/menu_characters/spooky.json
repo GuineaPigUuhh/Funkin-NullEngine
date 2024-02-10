@@ -1,0 +1,7 @@
+{
+    "idleAnim": "spooky dance idle BLACK LINES",
+    "confirmAnim": "Idle",
+    "scale": 0.5,
+    "offset": [60, 100],
+    "flipX": false
+}

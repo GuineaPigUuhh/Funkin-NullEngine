@@ -19,7 +19,7 @@ class MenuCharacter extends FlxSprite
 		originX = x;
 		originY = y;
 
-		frames = AssetsHelper.getSparrowAtlas('menus/story_mode/characters/default_chars');
+		frames = AssetsHelper.getCustomPathSparrowAtlas('menu_characters/vanillaChars');
 
 		antialiasing = true;
 
@@ -45,7 +45,7 @@ class MenuCharacter extends FlxSprite
 				visible = false;
 
 			default:
-				var curData = MenuCharactersManager.menuCharsMAP.get(character);
+				var curData = MenuCharactersManager.get(character);
 
 				animation.addByPrefix(character, curData.idleAnim, 24);
 				if (curData.confirmAnim != "")

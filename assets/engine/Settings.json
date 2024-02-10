@@ -1,0 +1,8 @@
+{
+    "censor-naughty": true,
+    "downscroll": false,
+    "flashing_menu": true,
+    "camera_zoom": true,
+    "fps_counter": true,
+    "auto_pause": true
+}

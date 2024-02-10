@@ -1,0 +1,7 @@
+{
+    "idleAnim": "Dad idle dance BLACK LINE",
+    "confirmAnim": "Idle",
+    "scale": 0.5,
+    "offset": [100, 5],
+    "flipX": false
+}

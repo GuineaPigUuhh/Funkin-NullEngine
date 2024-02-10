@@ -1,0 +1,7 @@
+{
+    "idleAnim": "Mom Idle BLACK LINES",
+    "confirmAnim": "Idle",
+    "scale": 0.5,
+    "offset": [80, -10],
+    "flipX": false
+}

@@ -1,0 +1,7 @@
+{
+    "idleAnim": "GF Dancing Beat WHITE",
+    "confirmAnim": "Idle",
+    "scale": 0.5,
+    "offset": [60, 60],
+    "flipX": false
+}

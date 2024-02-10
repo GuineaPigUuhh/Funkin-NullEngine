@@ -1,0 +1,7 @@
+{
+    "idleAnim": "Tankman Menu BLACK",
+    "confirmAnim": "Idle",
+    "scale": 1,
+    "offset": [0, 50],
+    "flipX": false
+}

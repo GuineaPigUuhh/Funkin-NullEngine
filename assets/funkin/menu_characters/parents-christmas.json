@@ -1,0 +1,7 @@
+{
+    "idleAnim": "Parent Christmas Idle",
+    "confirmAnim": "Idle",
+    "scale": 0.4,
+    "offset": [-60, 55],
+    "flipX": false
+}

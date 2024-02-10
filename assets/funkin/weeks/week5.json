@@ -1,0 +1,27 @@
+{
+    "hideInFreeplay": false,
+    "hideInStorymode": false,
+    "title": "RED SNOW",
+    "characters": [
+        "parents-christmas",
+        "bf",
+        "gf"
+    ],
+    "songs": [
+        {
+            "name": "Cocoa",
+            "icon": "parents",
+            "color": "baf5ff"
+        },
+        {
+            "name": "Eggnog",
+            "icon": "parents",
+            "color": "baf5ff"
+        },
+        {
+            "name": "Winter-Horrorland",
+            "icon": "monster",
+            "color": "baf5ff"
+        }
+    ]
+}

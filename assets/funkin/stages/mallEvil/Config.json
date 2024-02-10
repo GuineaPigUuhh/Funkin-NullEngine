@@ -1,0 +1,9 @@
+{
+    "cam_zoom": 1,
+    "cam_speed": 1,
+    "charsPos": {
+        "dad": [100,20],
+        "gf": [400,130],
+        "boyfriend": [1090,470]
+    }
+}

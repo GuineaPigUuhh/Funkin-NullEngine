@@ -101,9 +101,9 @@ class Main extends Sprite
 	{
 		Settings.init();
 
-		FNFManager.load();
+		CharactersManager.loadList();
+		StagesDataManager.loadList();
 
-		PreferencesMenu.initPrefs();
 		PlayerSettings.init();
 		Highscore.load();
 

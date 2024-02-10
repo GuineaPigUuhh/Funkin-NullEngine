@@ -39,6 +39,8 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		WeeksManager.load();
+
 		#if discord_rpc
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -133,7 +135,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		lerpScore = CoolUtil.coolLerp(lerpScore, intendedScore, 0.4);
-		bg.color = FlxColor.interpolate(bg.color, FlxColor.fromString(songs[curSelected].songColor), CoolUtil.camLerpShit(0.045));
+		bg.color = FlxColor.interpolate(bg.color, FlxColor.fromString("#" + songs[curSelected].songColor), CoolUtil.camLerpShit(0.045));
 
 		scoreText.text = "PERSONAL BEST:" + Math.round(lerpScore);
 

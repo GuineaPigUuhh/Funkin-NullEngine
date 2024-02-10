@@ -322,36 +322,6 @@ class Character extends FlxSprite
 
 				loadMappedAnims();
 
-			/*
-				case 'bf':
-					var tex = AssetsHelper.getSparrowAtlas('characters/boyfriends/BOYFRIEND');
-					frames = tex;
-					quickAnimAdd('idle', 'BF idle dance');
-					quickAnimAdd('singUP', 'BF NOTE UP0');
-					quickAnimAdd('singLEFT', 'BF NOTE LEFT0');
-					quickAnimAdd('singRIGHT', 'BF NOTE RIGHT0');
-					quickAnimAdd('singDOWN', 'BF NOTE DOWN0');
-					quickAnimAdd('singUPmiss', 'BF NOTE UP MISS');
-					quickAnimAdd('singLEFTmiss', 'BF NOTE LEFT MISS');
-					quickAnimAdd('singRIGHTmiss', 'BF NOTE RIGHT MISS');
-					quickAnimAdd('singDOWNmiss', 'BF NOTE DOWN MISS');
-					quickAnimAdd('hey', 'BF HEY');
-
-					quickAnimAdd('firstDeath', "BF dies");
-					animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
-					quickAnimAdd('deathConfirm', "BF Dead confirm");
-
-					animation.addByPrefix('scared', 'BF idle shaking', 24, true);
-
-					loadOffsetFile(curCharacter);
-
-					playAnim('idle');
-
-					flipX = true;
-
-					loadOffsetFile(curCharacter);
-			 */
-
 			case 'bf-christmas':
 				var tex = AssetsHelper.getSparrowAtlas('characters/boyfriends/bfChristmas');
 				frames = tex;
@@ -591,7 +561,7 @@ class Character extends FlxSprite
 		frames = AssetsHelper.getCustomPathSparrowAtlas('characters/${curCharacter}/spritesheet');
 
 		flipX = customChar.flipX;
-		antialiasing = (customChar.antialiasing ? FlxG.save.data.antialiasing : false);
+		antialiasing = (customChar.antialiasing ? customChar.antialiasing : false);
 		charColor = customChar.color;
 		isGF = customChar.isGF;
 		if (customChar.scale != 1)

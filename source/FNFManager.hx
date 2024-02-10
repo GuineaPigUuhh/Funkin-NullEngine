@@ -1,6 +1,12 @@
 package;
 
+import haxe.Json;
+import haxe.format.JsonParser;
+import haxe.macro.Type.AnonType;
 import sys.FileSystem;
+
+using StringTools;
+
 #if desktop
 import sys.FileSystem;
 import sys.io.File;
@@ -11,21 +17,9 @@ class FNFManager
 {
 	public static var managers:Array<Dynamic> = [WeeksManager, CharactersManager, MenuCharactersManager, StagesDataManager];
 
-	public static function load()
-	{
-		for (managerShit in managers)
-		{
-			managerShit.load();
-		}
-	}
+	public static function load() {}
 
-	public static function reload()
-	{
-		for (managerShit in managers)
-		{
-			managerShit.reload();
-		}
-	}
+	public static function reload() {}
 }
 
 class CharactersManager
@@ -33,129 +27,95 @@ class CharactersManager
 	public static var charList:Array<String> = [];
 
 	static var vanillaChars:Array<String> = [
-		"bf", "dad", "gf", "spooky", "pico", "mom", "mom-car", "bf-car", "parents-christmas", "monster-christmas", "bf-christmas", "gf-christmas", "monster",
+		"dad", "gf", "spooky", "pico", "mom", "mom-car", "bf-car", "parents-christmas", "monster-christmas", "bf-christmas", "gf-christmas", "monster",
 		"bf-pixel", "senpai", "senpai-angry", "spirit", "tankman", "pico-speaker", "bf-holding-gf"
 	]; // Only use this if your character is from Source Code
 
-	public static function load()
-	{
-		for (char in vanillaChars)
-		{
-			charList.push(char);
-		}
-	}
-
-	public static function reload()
+	public static function loadList()
 	{
 		charList = [];
-		load();
+		for (char in vanillaChars)
+			charList.push(char);
+		for (char in FileSystem.readDirectory(AssetsHelper.getDefaultPath("characters/")))
+			charList.push(char);
 	}
 }
 
 class WeeksManager
 {
-	public static var weeksXml:Xml;
-
 	public static var weekNames:Array<String> = [];
 	public static var weekSongs:Array<Array<String>> = [];
 	public static var weekCharacters:Array<Array<String>> = [];
 	public static var weekTitles:Array<String> = [];
 
-	// HOLYSHIT FREEPLAY AREA!!!!
+	// FREEPLAY
 	public static var weekIcons:Array<Array<String>> = [];
 	public static var weekColors:Array<Array<String>> = [];
 
-	public static function load()
-	{
-		weeksXml = Xml.parse(File.getContent(AssetsHelper.xml('weeks')));
-
-		for (e in weeksXml.elementsNamed('week'))
-		{
-			var songs:Array<String> = [];
-			var characters:Array<String> = [];
-
-			// HOLYSHIT FREEPLAY AREA!!!!
-			var icons:Array<String> = [];
-			var colors:Array<String> = [];
-
-			for (c in e.get("characters").split(","))
-			{
-				characters.push(c);
-			}
-			for (s in e.elementsNamed('song'))
-			{
-				songs.push(s.get("name"));
-				icons.push(s.get("icon"));
-				colors.push(s.get("color"));
-			}
-
-			weekNames.push(e.get("name"));
-			weekTitles.push(e.get("title"));
-			weekSongs.push(songs);
-			weekCharacters.push(characters);
-
-			// HOLYSHIT FREEPLAY AREA!!!!
-			weekColors.push(colors);
-			weekIcons.push(icons);
-		}
-	}
-
-	public static function reload()
+	public static function resetStaticVariables()
 	{
 		weekNames = [];
 		weekSongs = [];
 		weekCharacters = [];
 		weekTitles = [];
 
-		// HOLYSHIT FREEPLAY AREA!!!!
+		// FREEPLAY
 		weekIcons = [];
 		weekColors = [];
-
-		load();
 	}
+
+	public static function load()
+	{
+		resetStaticVariables();
+		for (week in FileSystem.readDirectory(AssetsHelper.getDefaultPath("weeks/")))
+		{
+			if (week.endsWith(".json"))
+			{
+				var realJson = week.replace(".json", "");
+				var customWeek:WeekData = Json.parse(File.getContent(AssetsHelper.getFilePath('weeks/${realJson}', JSON)));
+
+				weekNames.push(realJson);
+				weekCharacters.push(customWeek.characters);
+				weekTitles.push(customWeek.title);
+
+				var _Songs:Array<String> = [];
+				var _Icons:Array<String> = [];
+				var _Colors:Array<String> = [];
+				for (song in customWeek.songs)
+				{
+					_Songs.push(song.name);
+					_Icons.push(song.icon);
+					_Colors.push(song.color);
+				}
+				weekSongs.push(_Songs);
+				weekIcons.push(_Icons);
+				weekColors.push(_Colors);
+			}
+		}
+	}
+}
+
+typedef WeekData =
+{
+	var hideInFreeplay:Bool;
+	var hideInStorymode:Bool;
+	var title:String;
+	var characters:Array<String>;
+	var songs:Array<WeekSongData>;
+}
+
+typedef WeekSongData =
+{
+	var name:String;
+	var icon:String;
+	var color:String;
 }
 
 class MenuCharactersManager
 {
-	public static var menuCharsXml:Xml;
-	public static var menuCharsMAP:Map<String, MenuCharData> = [];
-
-	public static function load()
+	public static function get(curChar)
 	{
-		menuCharsXml = Xml.parse(File.getContent(AssetsHelper.xml('menu_characters')));
-		for (e in menuCharsXml.elementsNamed('char'))
-		{
-			var menuCharData:MenuCharData = {
-				idleAnim: "idle",
-				confirmAnim: "",
-				flipX: false,
-				offset: [0, 0],
-				scale: 1
-			};
-
-			menuCharData.idleAnim = e.get('idleAnim');
-			if (e.exists('confirmAnim'))
-			{
-				menuCharData.confirmAnim = e.get('confirmAnim');
-			}
-
-			if (e.exists('flipX'))
-				menuCharData.flipX = XmlUtil.parseBool(e.get('flipX'));
-
-			if (e.exists('offset'))
-				menuCharData.offset = XmlUtil.parseArrayFloat(e.get('offset'));
-
-			if (e.exists('scale'))
-				menuCharData.scale = Std.parseFloat(e.get('scale'));
-
-			menuCharsMAP.set(e.get('name'), menuCharData);
-		}
-	}
-
-	public static function reload()
-	{
-		menuCharsMAP = [];
-		load();
+		return Json.parse(File.getContent(AssetsHelper.getFilePath('menu_characters/${curChar}', JSON)));
 	}
 }
 
@@ -170,48 +130,24 @@ typedef MenuCharData =
 
 class StagesDataManager
 {
-	public static var stagesDataXml:Xml;
-	public static var stagesDataMAP:Map<String, StageData> = [];
-
 	public static var stageList:Array<String> = [];
 
-	public static function load()
+	public static function get(curStage:String)
 	{
-		stagesDataXml = Xml.parse(File.getContent(AssetsHelper.xml('stages')));
-		for (e in stagesDataXml.elementsNamed('stageData'))
-		{
-			var stageData:StageData = {
-				camZoom: 1.05,
-				camSpeed: 1,
-				charsPos: {dad: [100, 100], gf: [400, 130], boyfriend: [770, 450]},
-			};
-
-			if (e.exists('camZoom'))
-				stageData.camZoom = Std.parseFloat(e.get('camZoom'));
-			if (e.exists('camSpeed'))
-				stageData.camSpeed = Std.parseFloat(e.get('camSpeed'));
-
-			for (char in e.elementsNamed('charPos'))
-			{
-				Reflect.setProperty(stageData.charsPos, char.get('name'), XmlUtil.parseArrayFloat(char.get('position')));
-			}
-
-			stageList.push(e.get('name'));
-			stagesDataMAP.set(e.get('name'), stageData);
-		}
+		return Json.parse(File.getContent(AssetsHelper.getFilePath('stages/${curStage}/Config', JSON)));
 	}
 
-	public static function reload()
+	public static function loadList()
 	{
 		stageList = [];
-		stagesDataMAP = [];
-		load();
+		for (stage in FileSystem.readDirectory(AssetsHelper.getDefaultPath("stages/")))
+			stageList.push(stage);
 	}
 }
 
 typedef StageData =
 {
-	var camZoom:Float;
-	var camSpeed:Float;
-	var charsPos:{dad:Array<Float>, gf:Array<Float>, boyfriend:Array<Float>};
+	var cam_zoom:Float;
+	var cam_speed:Float;
+	var charsPos:Dynamic;
 }

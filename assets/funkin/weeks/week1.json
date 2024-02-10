@@ -1,0 +1,27 @@
+{
+    "hideInFreeplay": false,
+    "hideInStorymode": false,
+    "title": "Daddy Dearest",
+    "characters": [
+        "dad",
+        "bf",
+        "gf"
+    ],
+    "songs": [
+        {
+            "name": "Bopeebo",
+            "icon": "dad",
+            "color": "77459c"
+        },
+        {
+            "name": "Fresh",
+            "icon": "dad",
+            "color": "77459c"
+        },
+        {
+            "name": "Dadbattle",
+            "icon": "dad",
+            "color": "77459c"
+        }
+    ]
+}

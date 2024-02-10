@@ -1,0 +1,27 @@
+{
+    "hideInFreeplay": false,
+    "hideInStorymode": false,
+    "title": "hating simulator ft. moawling",
+    "characters": [
+        "senpai",
+        "bf",
+        "gf"
+    ],
+    "songs": [
+        {
+            "name": "Senpai",
+            "icon": "senpai",
+            "color": "c883f7"
+        },
+        {
+            "name": "Roses",
+            "icon": "senpai",
+            "color": "c883f7"
+        },
+        {
+            "name": "Thorns",
+            "icon": "spirit",
+            "color": "c883f7"
+        }
+    ]
+}

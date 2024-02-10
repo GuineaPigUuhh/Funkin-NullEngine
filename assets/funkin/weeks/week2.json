@@ -1,0 +1,27 @@
+{
+    "hideInFreeplay": false,
+    "hideInStorymode": false,
+    "title": "Spooky Month!",
+    "characters": [
+        "spooky",
+        "bf",
+        "gf"
+    ],
+    "songs": [
+        {
+            "name": "Spookeez",
+            "icon": "spooky",
+            "color": "784d85"
+        },
+        {
+            "name": "South",
+            "icon": "spooky",
+            "color": "784d85"
+        },
+        {
+            "name": "Monster",
+            "icon": "monster",
+            "color": "784d85"
+        }
+    ]
+}

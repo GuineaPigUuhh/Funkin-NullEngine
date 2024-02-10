@@ -1,0 +1,17 @@
+{
+    "hideInFreeplay": false,
+    "hideInStorymode": false,
+    "title": "Tutorial",
+    "characters": [
+        "",
+        "bf",
+        "gf"
+    ],
+    "songs": [
+        {
+            "name": "Tutorial",
+            "icon": "gf",
+            "color": "77459c"
+        }
+    ]
+}

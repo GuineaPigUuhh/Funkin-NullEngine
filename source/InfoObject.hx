@@ -36,8 +36,6 @@ class InfoObject extends TextField
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 
-	var reloadButton:Bool = true;
-
 	public function new(x:Float = 10, y:Float = 10)
 	{
 		super();
@@ -53,7 +51,7 @@ class InfoObject extends TextField
 		visible = true;
 		multiline = true;
 		text = "";
-		alpha = 0.85;
+		alpha = 0.9;
 
 		cacheCount = 0;
 		currentTime = 0;
@@ -85,20 +83,16 @@ class InfoObject extends TextField
 
 		updateInfo();
 
-		if (reloadButton)
-		{
-			if (FlxG.keys.justPressed.F1)
-			{
-				FNFManager.reload();
-				trace('the Engine has already finished loading the Data Folder Files');
-			}
-		}
-		if (FlxG.keys.justPressed.F11)
-		{
-			FlxG.fullscreen = !FlxG.fullscreen;
-		}	
+		visible = Settings.get("fps counter");
+		keyboardKeys();
 
 		cacheCount = currentCount;
+	}
+
+	function keyboardKeys()
+	{
+		if (FlxG.keys.justPressed.F11)
+			FlxG.fullscreen = !FlxG.fullscreen;
 	}
 
 	function updateInfo()
@@ -107,9 +101,5 @@ class InfoObject extends TextField
 		memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 
 		text = "FPS: " + currentFPS + " • MEM: " + memoryMegas + " MB\n";
-		if (reloadButton)
-		{
-			text += "[F1] - Reload Data Folder";
-		}
 	}
 }

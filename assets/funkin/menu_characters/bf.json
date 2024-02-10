@@ -1,0 +1,7 @@
+{
+    "idleAnim": "BF idle dance white",
+    "confirmAnim": "BF HEY!!",
+    "scale": 0.9,
+    "offset": [0, 20],
+    "flipX": false
+}
