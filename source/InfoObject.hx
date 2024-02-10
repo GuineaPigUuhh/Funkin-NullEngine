@@ -93,6 +93,10 @@ class InfoObject extends TextField
 				trace('the Engine has already finished loading the Data Folder Files');
 			}
 		}
+		if (FlxG.keys.justPressed.F11)
+		{
+			FlxG.fullscreen = !FlxG.fullscreen;
+		}	
 
 		cacheCount = currentCount;
 	}

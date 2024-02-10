@@ -26,7 +26,7 @@ import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import flixel.system.FlxSound;
+import flixel.sound.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -37,7 +37,7 @@ import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import haxe.Json;
-import hxcodec.VideoHandler;
+import hxcodec.flixel.FlxVideo;
 import lime.utils.Assets;
 import openfl.Lib;
 import openfl.display.BitmapData;
@@ -886,10 +886,10 @@ class PlayState extends MusicBeatState
 	function playVideo(name:String, atEndOfSong:Bool = false)
 	{
 		inCutscene = true;
-		FlxG.sound.music.stop();
 
-		var video:VideoHandler = new VideoHandler();
-		video.finishCallback = function()
+		var video:FlxVideo = new FlxVideo();
+		video.play(AssetsHelper.video(name));
+		video.onEndReached.add(function()
 		{
 			if (atEndOfSong)
 			{
@@ -903,9 +903,8 @@ class PlayState extends MusicBeatState
 			}
 			else
 				startCountdown();
-		}
-
-		video.playVideo(AssetsHelper.video(name));
+			return;
+		}, true);
 	}
 
 	function initDiscord():Void

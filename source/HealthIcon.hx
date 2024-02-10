@@ -36,12 +36,21 @@ class HealthIcon extends FlxSprite
 		{
 			if (animation.getByName(newChar) == null)
 			{
-				loadGraphic(AssetsHelper.image('icons/' + newChar), true, 150, 150);
+				loadIcon(newChar);
 				animation.add(newChar, [0, 1], 0, false, isPlayer);
 			}
 			animation.play(newChar);
 			char = newChar;
 		}
+	}
+
+	function loadIcon(char:String)
+	{
+		var customIcon_Path = AssetsHelper.getFilePath('characters/${char}/icon', IMAGE);
+		if (AssetsHelper.fileExists(customIcon_Path))
+			loadGraphic(customIcon_Path, true, 150, 150);
+		else
+			loadGraphic(AssetsHelper.image('icons/' + char), true, 150, 150);
 	}
 
 	override function update(elapsed:Float)

@@ -1,6 +1,5 @@
 package;
 
-import FNFManager.CharactersManager;
 import Section.SwagSection;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -8,7 +7,10 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
+import haxe.Json;
+import haxe.format.JsonParser;
 import haxe.io.Path;
+import haxe.macro.Type.AnonType;
 
 using StringTools;
 
@@ -17,6 +19,29 @@ import sys.FileSystem;
 import sys.io.File;
 import sys.thread.Thread;
 #end
+
+typedef CharData =
+{
+	var flipX:Bool;
+	var antialiasing:Bool;
+	var color:String;
+	var isGF:Bool;
+	var scale:Float;
+
+	var charOffset:Array<Float>;
+	var cameraOffset:Array<Float>;
+
+	var anims:AnonType;
+}
+
+typedef CharAnimData =
+{
+	var prefix:String;
+	var indices:Array<Int>;
+	var fps:Int;
+	var loop:Bool;
+	var offset:Array<Float>;
+}
 
 class Character extends FlxSprite
 {
@@ -297,33 +322,35 @@ class Character extends FlxSprite
 
 				loadMappedAnims();
 
-			case 'bf':
-				var tex = AssetsHelper.getSparrowAtlas('characters/boyfriends/BOYFRIEND');
-				frames = tex;
-				quickAnimAdd('idle', 'BF idle dance');
-				quickAnimAdd('singUP', 'BF NOTE UP0');
-				quickAnimAdd('singLEFT', 'BF NOTE LEFT0');
-				quickAnimAdd('singRIGHT', 'BF NOTE RIGHT0');
-				quickAnimAdd('singDOWN', 'BF NOTE DOWN0');
-				quickAnimAdd('singUPmiss', 'BF NOTE UP MISS');
-				quickAnimAdd('singLEFTmiss', 'BF NOTE LEFT MISS');
-				quickAnimAdd('singRIGHTmiss', 'BF NOTE RIGHT MISS');
-				quickAnimAdd('singDOWNmiss', 'BF NOTE DOWN MISS');
-				quickAnimAdd('hey', 'BF HEY');
+			/*
+				case 'bf':
+					var tex = AssetsHelper.getSparrowAtlas('characters/boyfriends/BOYFRIEND');
+					frames = tex;
+					quickAnimAdd('idle', 'BF idle dance');
+					quickAnimAdd('singUP', 'BF NOTE UP0');
+					quickAnimAdd('singLEFT', 'BF NOTE LEFT0');
+					quickAnimAdd('singRIGHT', 'BF NOTE RIGHT0');
+					quickAnimAdd('singDOWN', 'BF NOTE DOWN0');
+					quickAnimAdd('singUPmiss', 'BF NOTE UP MISS');
+					quickAnimAdd('singLEFTmiss', 'BF NOTE LEFT MISS');
+					quickAnimAdd('singRIGHTmiss', 'BF NOTE RIGHT MISS');
+					quickAnimAdd('singDOWNmiss', 'BF NOTE DOWN MISS');
+					quickAnimAdd('hey', 'BF HEY');
 
-				quickAnimAdd('firstDeath', "BF dies");
-				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
-				quickAnimAdd('deathConfirm', "BF Dead confirm");
+					quickAnimAdd('firstDeath', "BF dies");
+					animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+					quickAnimAdd('deathConfirm', "BF Dead confirm");
 
-				animation.addByPrefix('scared', 'BF idle shaking', 24, true);
+					animation.addByPrefix('scared', 'BF idle shaking', 24, true);
 
-				loadOffsetFile(curCharacter);
+					loadOffsetFile(curCharacter);
 
-				playAnim('idle');
+					playAnim('idle');
 
-				flipX = true;
+					flipX = true;
 
-				loadOffsetFile(curCharacter);
+					loadOffsetFile(curCharacter);
+			 */
 
 			case 'bf-christmas':
 				var tex = AssetsHelper.getSparrowAtlas('characters/boyfriends/bfChristmas');
@@ -528,7 +555,8 @@ class Character extends FlxSprite
 
 				flipX = true;
 			default:
-				loadXMLchar(curCharacter);
+				// loadXMLchar(curCharacter);
+				loadJsonChar(); // new File System
 		}
 
 		dance();
@@ -557,34 +585,38 @@ class Character extends FlxSprite
 		}
 	}
 
-	function loadXMLchar(char:String)
+	function loadJsonChar()
 	{
-		var customChar = CharactersManager.charsMAP.get(char);
-
-		frames = AssetsHelper.getSparrowAtlas(customChar.sprite);
+		var customChar:CharData = Json.parse(File.getContent(AssetsHelper.getFilePath('characters/${curCharacter}/Config', JSON)));
+		frames = AssetsHelper.getCustomPathSparrowAtlas('characters/${curCharacter}/spritesheet');
 
 		flipX = customChar.flipX;
-		antialiasing = customChar.antialiasing;
-		icon = customChar.icon;
+		antialiasing = (customChar.antialiasing ? FlxG.save.data.antialiasing : false);
 		charColor = customChar.color;
 		isGF = customChar.isGF;
-
 		if (customChar.scale != 1)
 		{
 			scale.set(customChar.scale, customChar.scale);
 			updateHitbox();
 		}
 
-		for (e in customChar.anims)
-		{
-			if (e.indices != null)
-				animation.addByIndices(e.name, e.prefix, e.indices, "", e.fps, e.loop);
-			else
-			{
-				animation.addByPrefix(e.name, e.prefix, e.fps, e.loop);
-			}
+		cameraOffset = customChar.charOffset;
+		cameraOffset = customChar.cameraOffset;
 
-			addOffset(e.name, e.offset[0], e.offset[1]);
+		for (curAnim in Reflect.fields(customChar.anims))
+		{
+			var anim:CharAnimData = Reflect.field(customChar.anims, curAnim);
+
+			if (anim.prefix != null)
+			{
+				if (anim.indices == null)
+					animation.addByPrefix(curAnim, anim.prefix, anim.fps, anim.loop);
+				else
+					animation.addByIndices(curAnim, anim.prefix, anim.indices, "", anim.fps, anim.loop);
+
+				if (anim.offset != null)
+					addOffset(curAnim, anim.offset[0], anim.offset[1]);
+			}
 		}
 	}
 

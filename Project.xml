@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin'- Null Engine" packageName="com.capybaracoding.funkin" package="com.capybaracoding.funkin" main="Main" version="0.2.8" company="CapybaraCoding" />
+	<app title="Friday Night Funkin'- Null Engine" packageName="com.guineapiguuhh.funkin" package="com.guineapiguuhh.funkin" main="Main" version="0.2.8" company="GuineaPigUuhh" />
 
 	<app file="NullEngine_Windows" if="windows"/>
 	<app file="NullEngine_Linux" if="linux"/>
@@ -42,8 +42,9 @@
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
 	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
 
-	<assets path="assets"/>
-	
+	<assets path="assets/engine"/>
+	<assets path="assets/funkin"/>
+
 	<classpath name="source" />
 
 
@@ -63,6 +64,8 @@
 
 	<haxelib name="hxCodec" if="desktop || android" />
 	<haxelib name="flxanimate"/>
+
+	<haxelib name="tjson"/>
 	
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
@@ -119,10 +122,10 @@
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
 	
-	<icon path="art/flixel-icons/icon16.png" size='16'/>
-	<icon path="art/flixel-icons/icon32.png" size='32'/>
-	<icon path="art/flixel-icons/icon64.png" size='64'/>
-	<icon path="art/flixel-icons/iconOG.png" />
+	<icon path="assets/engine/flixel-icons/16.png" size='16'/>
+	<icon path="assets/engine/flixel-icons/32.png" size='32'/>
+	<icon path="assets/engine/flixel-icons/64.png" size='64'/>
+	<icon path="assets/engine/flixel-icons/OG.png" />
 
 	<!-- <haxedef name="SKIP_TO_PLAYSTATE" if="debug" /> -->
 	

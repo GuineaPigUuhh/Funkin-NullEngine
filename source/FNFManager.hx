@@ -30,8 +30,6 @@ class FNFManager
 
 class CharactersManager
 {
-	public static var charXml:Xml;
-	public static var charsMAP:Map<String, CharData> = [];
 	public static var charList:Array<String> = [];
 
 	static var vanillaChars:Array<String> = [
@@ -45,107 +43,13 @@ class CharactersManager
 		{
 			charList.push(char);
 		}
-
-		charXml = Xml.parse(File.getContent(AssetsHelper.xml('characters')));
-		for (e in charXml.elementsNamed("char"))
-		{
-			var charData:CharData = {
-				flipX: false,
-				isGF: false,
-				antialiasing: true,
-				icon: "bf",
-				color: "A1A1A1",
-				scale: 1,
-				sprite: "characters/BOYFRIEND",
-				anims: []
-			};
-
-			if (e.exists("sprite"))
-				charData.sprite = e.get("sprite");
-			else
-				charData.sprite = 'characters/' + e.get("name");
-
-			if (e.exists("icon"))
-				charData.icon = e.get("icon");
-			else
-				charData.icon = e.get("name");
-
-			charData.antialiasing = (XmlUtil.parseBool(e.get("antialiasing")) == true ? true : false);
-
-			if (e.exists('flipX'))
-				charData.flipX = XmlUtil.parseBool(e.get("flipX"));
-
-			if (e.exists("scale"))
-				charData.scale = Std.parseFloat(e.get("scale"));
-
-			if (e.exists("color"))
-				charData.color = e.get("color");
-
-			if (e.exists("isGF"))
-				charData.isGF = XmlUtil.parseBool(e.get("isGF"));
-			else
-				charData.isGF = false;
-
-			for (anim in e.elementsNamed("anim"))
-			{
-				var animData:CharAnimData = {
-					name: "animName",
-					prefix: "animPrefix",
-					indices: null,
-					loop: false,
-					fps: 24,
-					offset: [0, 0]
-				};
-
-				animData.name = anim.get("name");
-				animData.prefix = anim.get("prefix");
-				animData.loop = XmlUtil.parseBool(anim.get("loop"));
-				animData.fps = Std.parseInt(anim.get("fps"));
-
-				var offsetArray:Array<Float> = XmlUtil.parseArrayFloat(anim.get("offset"));
-				animData.offset = offsetArray;
-
-				var indicesArray:Array<Int> = XmlUtil.parseArrayInt(anim.get("indices"));
-				if (anim.exists("indices"))
-					animData.indices = indicesArray;
-
-				charData.anims.push(animData);
-			}
-
-			charList.push(e.get("name"));
-			charsMAP.set(e.get("name"), charData);
-		}
 	}
 
 	public static function reload()
 	{
-		charsMAP = [];
 		charList = [];
 		load();
 	}
-}
-
-typedef CharData =
-{
-	var flipX:Bool;
-	var antialiasing:Bool;
-	var icon:String;
-	var color:String;
-	var sprite:String;
-	var isGF:Bool;
-	var scale:Float;
-
-	var anims:Array<CharAnimData>;
-}
-
-typedef CharAnimData =
-{
-	var name:String;
-	var prefix:String;
-	var indices:Array<Int>;
-	var loop:Bool;
-	var fps:Int;
-	var offset:Array<Float>;
 }
 
 class WeeksManager
