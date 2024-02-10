@@ -267,6 +267,7 @@ class PlayState extends MusicBeatState
 		if (stageData.cam_zoom != 1.05)
 			defaultCamZoom = stageData.cam_zoom;
 
+		var isCustomStage = false;
 		switch (curStage)
 		{
 			case 'spooky':
@@ -592,8 +593,11 @@ class PlayState extends MusicBeatState
 				add(stageCurtains);
 
 			default:
-				customStage = new CustomStage(curStage);
+				isCustomStage = true;
 		}
+		customStage = new CustomStage(curStage);
+		if (isCustomStage)
+			customStage.execute();
 
 		var gfVersion:String = 'gf';
 
@@ -877,9 +881,10 @@ class PlayState extends MusicBeatState
 		else
 			startCountdown();
 
-		defaultVariablesToScripts([global_scripts, song_scripts]);
+		defaultVariablesToScripts([global_scripts, song_scripts, customStage]);
 
 		scriptsCall("onCreatePost", []);
+		customStage.call("onCreatePost", []);
 
 		super.create();
 	}
@@ -963,6 +968,8 @@ class PlayState extends MusicBeatState
 	{
 		for (pack in all)
 		{
+			pack.set('game', game);
+
 			pack.set('songName', songName);
 			pack.set('playVideo', playVideo);
 			pack.set('curStage', curStage);
@@ -1401,6 +1408,7 @@ class PlayState extends MusicBeatState
 		// FlxG.camera.followLerp = CoolUtil.camLerpShit(0.04);
 
 		scriptsCall("onUpdate", [elapsed]);
+		customStage.call("onUpdate", [elapsed]);
 
 		#if !debug
 		perfectMode = false;
@@ -1682,6 +1690,7 @@ class PlayState extends MusicBeatState
 			keyShit();
 
 		scriptsCall("onUpdatePost", [elapsed]);
+		customStage.call("onUpdatePost", [elapsed]);
 	}
 
 	function killCombo():Void
@@ -1802,6 +1811,7 @@ class PlayState extends MusicBeatState
 			FlxG.switchState(new FreeplayState());
 		}
 		scriptsCall("onEndSong", []);
+		customStage.call("onEndSong", []);
 	}
 
 	// gives score and pops up rating
@@ -2137,7 +2147,10 @@ class PlayState extends MusicBeatState
 		boyfriend.playSingAnim(note.noteData, "miss");
 
 		if (forced == false)
-			scriptsCall("onPlayerMiss", [elapsed]);
+		{
+			scriptsCall("onPlayerMiss", [note]);
+			customStage.call("onPlayerMiss", [note]);
+		}
 	}
 
 	function forceMiss(dir)
@@ -2145,7 +2158,8 @@ class PlayState extends MusicBeatState
 		var daFake:Note = new Note(0, dir, null, false);
 		noteMiss(daFake, true);
 
-		scriptsCall("onPlayerForceMiss", [elapsed]);
+		scriptsCall("onPlayerForceMiss", [dir]);
+		customStage.call("onPlayerForceMiss", [dir]);
 	}
 
 	function goodNoteHit(daNote:Note):Void
@@ -2185,6 +2199,7 @@ class PlayState extends MusicBeatState
 			daNote.destroy();
 
 			scriptsCall("onPlayerHit", [daNote]);
+			customStage.call("onPlayerHit", [daNote]);
 		}
 	}
 
@@ -2226,6 +2241,7 @@ class PlayState extends MusicBeatState
 		daNote.destroy();
 
 		scriptsCall("onOpponentHit", [daNote]);
+		customStage.call("onOpponentHit", [daNote]);
 	}
 
 	function updateAccuracy()
@@ -2372,6 +2388,7 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		}
 		scriptsCall("onStepHit", []);
+		customStage.call("onStepHit", []);
 	}
 
 	function charsDance()
@@ -2508,6 +2525,7 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 		scriptsCall("onBeatHit", []);
+		customStage.call("onBeatHit", []);
 	}
 
 	var curLight:Int = 0;

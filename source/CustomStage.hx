@@ -2,28 +2,25 @@ class CustomStage
 {
 	public var executed:Bool = false;
 	public var script:FunkinScript;
+	public var stage:String = null;
 
 	public function new(curStage:String)
 	{
-		configStage(curStage);
-	}
+		stage = curStage;
+	} // to load
 
-	function configStage(curStage:String)
+	public function execute()
 	{
 		executed = true;
 
-		script = new FunkinScript(AssetsHelper.hscript('stages/${curStage}'));
+		var script_local = AssetsHelper.getFilePath('stages/${stage}/Script', HSCRIPT);
+		script = new FunkinScript(script_local);
 		script.load();
 
 		call('onCreate', []);
-
-		if (!AssetsHelper.fileExists(AssetsHelper.hscript('stages/${curStage}')))
-		{
-			trace('ERROR: no has file');
-		}
 	}
 
-	public function set(name:String, value:String)
+	public function set(name:String, value:Dynamic)
 	{
 		if (executed)
 			script.set(name, value);
@@ -33,7 +30,6 @@ class CustomStage
 	{
 		if (executed)
 			return script.get(name);
-
 		return null;
 	}
 

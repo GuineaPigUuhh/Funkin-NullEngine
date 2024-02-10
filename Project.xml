@@ -65,7 +65,7 @@
 	<haxelib name="hxCodec" if="desktop || android" />
 	<haxelib name="flxanimate"/>
 
-	<haxelib name="tjson"/>
+	<haxelib name="polymod"/>
 	
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
