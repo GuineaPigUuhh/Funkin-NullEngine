@@ -26,16 +26,9 @@ class CharactersManager
 {
 	public static var charList:Array<String> = [];
 
-	static var vanillaChars:Array<String> = [
-		"dad", "gf", "spooky", "pico", "mom", "mom-car", "bf-car", "parents-christmas", "monster-christmas", "bf-christmas", "gf-christmas", "monster",
-		"bf-pixel", "senpai", "senpai-angry", "spirit", "tankman", "pico-speaker", "bf-holding-gf"
-	]; // Only use this if your character is from Source Code
-
 	public static function loadList()
 	{
 		charList = [];
-		for (char in vanillaChars)
-			charList.push(char);
 		for (char in FileSystem.readDirectory(AssetsHelper.getDefaultPath("characters/")))
 			charList.push(char);
 	}

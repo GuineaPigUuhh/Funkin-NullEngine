@@ -48,34 +48,19 @@
 	<classpath name="source" />
 
 
-	<!-- NOTE FOR FUTURE SELF SINCE FONTS ARE ALWAYS FUCKY 
-		TO FIX ONE OF THEM, I CONVERTED IT TO OTF. DUNNO IF YOU NEED TO
-		THEN UHHH I USED THE NAME OF THE FONT WITH SETFORMAT() ON THE TEXT!!!
-		NOT USING A DIRECT THING TO THE ASSET!!!
-	-->
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
 	<haxedev set='webgl' />
 
-	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
-
 	<haxelib name="hxCodec" if="desktop || android" />
 	<haxelib name="flxanimate"/>
-
 	<haxelib name="polymod"/>
-	
-	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
-	<!--haxelib name="newgrounds" unless="switch"/> -->
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
-	
-	<!-- <haxelib name="flixel-animate" /> -->
-	<!-- <haxelib name="spinehaxe" /> -->
-	<!-- https://github.com/ninjamuffin99/Flixel-Animate-Atlas-Player -->
 
 
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
@@ -126,12 +111,8 @@
 	<icon path="assets/engine/flixel-icons/32.png" size='32'/>
 	<icon path="assets/engine/flixel-icons/64.png" size='64'/>
 	<icon path="assets/engine/flixel-icons/OG.png" />
-
-	<!-- <haxedef name="SKIP_TO_PLAYSTATE" if="debug" /> -->
 	
 	<haxedef name="CAN_OPEN_LINKS" unless="switch"/>
 	<haxedef name="CAN_CHEAT" if="switch debug"/>
-	
-	<!-- <haxedef name="CLEAR_INPUT_SAVE"/> -->
 	
 </project>

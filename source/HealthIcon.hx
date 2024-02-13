@@ -29,7 +29,7 @@ class HealthIcon extends FlxSprite
 
 	public function changeIcon(newChar:String):Void
 	{
-		if (newChar != 'bf-pixel' && newChar != 'bf-old')
+		if (newChar != 'bf-pixel' && newChar != 'bf-old' && newChar != 'parents-christmas')
 			newChar = newChar.split('-')[0].trim();
 
 		if (newChar != char)
@@ -47,10 +47,9 @@ class HealthIcon extends FlxSprite
 	function loadIcon(char:String)
 	{
 		var customIcon_Path = AssetsHelper.getFilePath('characters/${char}/icon', IMAGE);
-		if (AssetsHelper.fileExists(customIcon_Path))
-			loadGraphic(customIcon_Path, true, 150, 150);
-		else
-			loadGraphic(AssetsHelper.image('icons/' + char), true, 150, 150);
+		if (!AssetsHelper.fileExists(customIcon_Path))
+			char = "crash";
+		loadGraphic(customIcon_Path, true, 150, 150);
 	}
 
 	override function update(elapsed:Float)
@@ -81,6 +80,6 @@ class HealthIcon extends FlxSprite
 
 		if (bopTween != null)
 			bopTween.cancel();
-		bopTween = FlxTween.tween(this, {"scale.x": saveScale[0], "scale.y": saveScale[1]}, 0.2, {ease: FlxEase.circOut});
+		bopTween = FlxTween.tween(this, {"scale.x": saveScale[0], "scale.y": saveScale[1]}, 0.2, {ease: FlxEase.quadOut});
 	}
 }

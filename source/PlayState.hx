@@ -230,34 +230,24 @@ class PlayState extends MusicBeatState
 		curStage = SONG.stage;
 		if (SONG.stage == null || SONG.stage.length < 1)
 		{
-			switch (songName)
+			final vanillaStageSongs:Map<Array<String>, String> = [
+				['tutorial', 'bopeebo', 'fresh', 'dadbattle'] => "stage",
+				['spookeez', 'monster', 'south'] => "spooky",
+				['pico', 'blammed', 'philly'] => "philly",
+				["milf", 'satin-panties', 'high'] => "limo",
+				["cocoa", 'eggnog'] => "mall",
+				['winter-horrorland'] => "mallEvil",
+				['senpai', 'roses'] => "school",
+				["thorns"] => "schoolEvil",
+				['guns', 'stress', 'ugh'] => "tank"
+			];
+			for (songs => stage in vanillaStageSongs)
 			{
-				case 'spookeez' | 'monster' | 'south':
-					curStage = 'spooky';
-
-				case 'pico' | 'blammed' | 'philly':
-					curStage = 'philly';
-
-				case "milf" | 'satin-panties' | 'high':
-					curStage = 'limo';
-
-				case "cocoa" | 'eggnog':
-					curStage = 'mall';
-
-				case 'winter-horrorland':
-					curStage = 'mallEvil';
-
-				case 'senpai' | 'roses':
-					curStage = 'school';
-
-				case 'thorns':
-					curStage = 'schoolEvil';
-
-				case 'guns' | 'stress' | 'ugh':
-					curStage = 'tank';
-
-				default:
-					curStage = 'stage';
+				for (curSong in songs)
+				{
+					if (curSong == songName)
+						curStage = stage;
+				}
 			}
 		}
 		SONG.stage = curStage;

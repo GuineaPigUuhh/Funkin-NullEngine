@@ -1,0 +1,77 @@
+{
+    "flipX": true,
+    "color": "31B0D1",
+    "isGF": false,
+    "antialiasing": true,
+    "scale": 1,
+    "charOffset":[0, 0],
+    "cameraOffset":[0, 0],
+    "anims":{
+        "idle":{
+            "prefix":"BF idle dance",
+            "fps":24,
+            "loop":false,
+            "offset":[0, 0]
+        },
+       "singUP":{
+            "prefix":"BF NOTE UP0",
+            "fps":24,
+            "loop":false,
+            "offset":[-41, 30]
+        },
+        "singDOWN":{
+            "prefix":"BF NOTE DOWN0",
+            "fps":24,
+            "loop":false,
+            "offset":[-19, -50]
+        },
+        "singLEFT":{
+            "prefix":"BF NOTE LEFT0",
+            "fps":24,
+            "loop":false,
+            "offset":[9, -7]
+        },
+        "singRIGHT":{
+            "prefix":"BF NOTE RIGHT0",
+            "fps":24,
+            "loop":false,
+            "offset":[-43, -5]
+        },
+        "singUPmiss":{
+            "prefix":"BF NOTE UP MISS",
+            "fps":24,
+            "loop":false,
+            "offset":[-41, 25]
+        },
+        "singDOWNmiss":{
+            "prefix":"BF NOTE DOWN MISS",
+            "fps":24,
+            "loop":false,
+            "offset":[-19, -21]
+        },
+        "singLEFTmiss":{
+            "prefix":"BF NOTE LEFT MISS",
+            "fps":24,
+            "loop":false,
+            "offset":[9, 19]
+        },
+        "singRIGHTmiss":{
+            "prefix":"BF NOTE RIGHT MISS",
+            "fps":24,
+            "loop":false,
+            "offset":[-41, 22]
+        },
+        "hey":{
+            "prefix":"BF HEY",
+            "fps":24,
+            "loop":false,
+            "offset":[7, 4]
+        },
+        "scared":{
+            "prefix":"BF idle shaking",
+            "fps":24,
+            "loop":false,
+            "offset":[-4, 0]
+        }
+    }
+}

@@ -5,7 +5,7 @@ In a few months or days, I will come back with Engine Development
 
 ## To-do
 - [x] a better modular System of Characters, Stages, Weeks and Story Mode Menu Characters
-- [ ] A system of Complete Scripts (the script system lacks some variables and some functions)
+- [x] A system of Complete Scripts (the script system lacks some variables and some functions)
 - [ ] Folder Organization
 - [ ] Organization in Source Folders
 - [ ] Better Chart Editor

@@ -123,13 +123,18 @@ class AssetsHelper
 		return FlxAtlasFrames.fromSparrow(image(file, library), getFilePath('images/' + file, XML, library));
 	}
 
+	inline static public function getPackerAtlas(file:String, ?library:String)
+	{
+		return FlxAtlasFrames.fromSpriteSheetPacker(image(file, library), getFilePath('images/' + file, TEXT, library));
+	}
+
 	inline static public function getCustomPathSparrowAtlas(file:String, ?library:String)
 	{
 		return FlxAtlasFrames.fromSparrow(getFilePath(file, IMAGE, library), getFilePath(file, XML, library));
 	}
 
-	inline static public function getPackerAtlas(file:String, ?library:String)
+	inline static public function getCustomPathPackerAtlas(file:String, ?library:String)
 	{
-		return FlxAtlasFrames.fromSpriteSheetPacker(image(file, library), getFilePath('images/' + file, TEXT, library));
+		return FlxAtlasFrames.fromSpriteSheetPacker(getFilePath(file, IMAGE, library), getFilePath(file, TEXT, library));
 	}
 }
