@@ -1,0 +1,1 @@
+@haxe -D analyzer-optimize --run Main %*

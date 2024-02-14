@@ -37,7 +37,6 @@ import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import haxe.Json;
-import hxcodec.flixel.FlxVideo;
 import lime.utils.Assets;
 import openfl.Lib;
 import openfl.display.BitmapData;
@@ -48,6 +47,7 @@ import shaderslmfao.BuildingShaders.BuildingShader;
 import shaderslmfao.BuildingShaders;
 import shaderslmfao.ColorSwap;
 import ui.PreferencesMenu;
+import vlc.MP4Handler as VideoHandler; // Haxelib Hxcodec 2.5.1
 
 using StringTools;
 
@@ -884,22 +884,12 @@ class PlayState extends MusicBeatState
 		inCutscene = true;
 
 		var video:FlxVideo = new FlxVideo();
-		video.play(AssetsHelper.video(name));
-		video.onPlaying.add(function()
+		video.playVideo(filepath);
+		video.finishCallback = function()
 		{
-			if (FlxG.keys.justPressed.SPACE)
-			{
-				video.dispose();
-				chooseEnding();
-				return;
-			}
-		}, true);
-		video.onEndReached.add(function()
-		{
-			video.dispose();
-			chooseEnding();
+			startAndEnd();
 			return;
-		}, true);
+		}
 	}
 
 	function chooseEnding()
