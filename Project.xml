@@ -57,7 +57,7 @@
 	<haxelib name="hscript" />
 	<haxelib name="hxCodec" if="desktop || android" />
 	<haxelib name="flxanimate"/>
-	<haxelib name="polymod"/>
+	<haxelib name="polymod" if="desktop"/>
 	<haxelib name="flixel-ui" />
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
