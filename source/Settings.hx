@@ -1,9 +1,7 @@
 package;
 
 import flixel.FlxG;
-import haxe.Json;
-import haxe.format.JsonParser;
-import haxe.macro.Type.AnonType;
+import tjson.TJSON as Json;
 
 using StringTools;
 

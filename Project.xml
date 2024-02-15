@@ -71,10 +71,11 @@
 	<haxelib name="flixel-addons" />
 
 	<!-- Null Engine Libraries -->
-	<haxelib name="hscript" />
+	<haxelib name="hscript"/>
 	<haxelib name="flxanimate"/>
+	<haxelib name="tjson"/>
 	<haxelib name="polymod" if="MODS_ALLOWED"/>
-	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 
 	<!-- Debug -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>

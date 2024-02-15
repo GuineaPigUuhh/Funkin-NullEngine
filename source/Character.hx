@@ -7,10 +7,9 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
-import haxe.Json;
-import haxe.format.JsonParser;
 import haxe.io.Path;
 import haxe.macro.Type.AnonType;
+import tjson.TJSON as Json;
 
 using StringTools;
 

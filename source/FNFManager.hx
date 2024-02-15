@@ -1,9 +1,8 @@
 package;
 
-import haxe.Json;
-import haxe.format.JsonParser;
 import haxe.macro.Type.AnonType;
 import sys.FileSystem;
+import tjson.TJSON as Json;
 
 using StringTools;
 

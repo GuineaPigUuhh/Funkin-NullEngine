@@ -6,12 +6,11 @@
     <img src="assets/engine/logo.png" />
 </p>
 
-## Anyone who wants to be a contributor to the engine just ask me on my discord on my profile
 ## Credits:
-- GuineaPigUuhh for the Code (Yippeee!)
 - [hxCodec](https://github.com/polybiusproxy/hxCodec) for the .MP4 Video Loader.
 - [FlxAnimate](https://github.com/Dot-Stuff/flxanimate/) Team for the Animate Atlas Support.
-- Aidan63 for [discord-rpc](https://github.com/Aidan63/linc_discord-rpc).
+- [Aidan63](https://github.com/Aidan63) for [discord-rpc](https://github.com/Aidan63/linc_discord-rpc).
+- [JWambaugh](https://github.com/JWambaugh) for [TJSON](https://github.com/JWambaugh/TJSON).
 
 # Build instructions
 1. install [Git](https://git-scm.com/download/win)
