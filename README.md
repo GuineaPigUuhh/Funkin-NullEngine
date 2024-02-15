@@ -1,15 +1,25 @@
 # Friday Night Funkin'- Null Engine
-In a few months or days, I will come back with Engine Development
+## <span style="color: red"> ⚠ the Engine is in BETA phase, use it knowing that there will be bugs ⚠</span>
 
-![Funny](https://media1.giphy.com/media/THlB4bsoSA0Cc/200w.gif?cid=6c09b9523f2js7eywzhz6a1d81ivoq39cyo3ct9ndel8nak2&ep=v1_gifs_search&rid=200w.gif&ct=g)
+![EngineLogo](assets/engine/logo.png)
+
+## Anyone who wants to be a contributor to the engine just ask me on my discord on my profile
+## Credits:
+- GuineaPigUuhh - Main Coder
+### Special Thanks
+- PolybiusProxy - hxCodec Lib
+- Dot-Stuff - FlxAnimate Lib
+
+# Build instructions
+- install [Haxe 4.2.5](https://haxe.org/download/version/4.2.5/) (This is the only tested version, if you want to use another, use it at your own risk)
+- run the [install.bat](https://github.com/GuineaPigUuhh/Funkin-NullEngine/blob/main/install-libs/install.bat) file inside the install-libs folder to install the libs that the engine needs
+
 
 ## To-do
 - [x] a better modular System of Characters, Stages, Weeks and Story Mode Menu Characters
 - [x] A system of Complete Scripts (the script system lacks some variables and some functions)
 - [ ] Folder Organization
 - [ ] Organization in Source Folders
-- [ ] Better Chart Editor
-- [ ] Character Editor
-- [ ] Tutorials for you to learn how to use the engine
-- [ ] Better README
-- [ ] Leave Beta
+- [ ] new Editors
+- [ ] Support Mods
+- [x] Better README
