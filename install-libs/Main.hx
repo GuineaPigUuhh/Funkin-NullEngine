@@ -9,6 +9,7 @@ class Main
 		new Lib("hscript", "2.5.0"),
 		new Lib("polymod", "1.7.0"),
 		new Lib("flxanimate", "", "https://github.com/Dot-Stuff/flxanimate"),
+		new Lib("discord_rpc", "", "https://github.com/Aidan63/linc_discord-rpc"),
 		new Lib("hxcodec", "2.5.1")
 	];
 

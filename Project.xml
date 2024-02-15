@@ -42,7 +42,6 @@
 	<define name="VIDEOS_ALLOWED" if="desktop || android" />
 
 	<haxedef name="CAN_OPEN_LINKS" unless="switch"/>
-	<haxedef name="CAN_CHEAT" if="switch debug"/>
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
