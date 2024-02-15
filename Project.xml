@@ -36,6 +36,14 @@
 	<!--Switch-specific-->
 	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
 
+	<!-- __________________________ CustomDefines _________________________ -->
+
+	<define name="MODS_ALLOWED" if="desktop" />
+	<define name="VIDEOS_ALLOWED" if="desktop || android" />
+
+	<haxedef name="CAN_OPEN_LINKS" unless="switch"/>
+	<haxedef name="CAN_CHEAT" if="switch debug"/>
+
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
@@ -44,32 +52,31 @@
 
 	<assets path="assets/engine"/>
 	<assets path="assets/funkin"/>
+	<section if="MODS_ALLOWED">
+		<assets path="mods" embed="false" />
+	</section>
 
 	<classpath name="source" />
-
-
+	
 	<!-- _______________________________ Libraries ______________________________ -->
 
+	<!-- Flixel -->
 	<haxelib name="flixel" />
-	<haxedev set='webgl' />
-
-	<haxelib name="flixel-addons" />
-	<haxelib name="hscript" />
-	<haxelib name="hxCodec" if="desktop || android" />
-	<haxelib name="flxanimate"/>
-	<haxelib name="polymod" if="desktop"/>
 	<haxelib name="flixel-ui" />
-	<haxelib name="faxe" if='switch'/>
+	<haxelib name="flixel-addons" />
+
+	<!-- Null Engine Libraries -->
+	<haxelib name="hscript" />
+	<haxelib name="flxanimate"/>
+	<haxelib name="polymod" if="MODS_ALLOWED"/>
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
+
+	<!-- Debug -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
 
-
-	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
-
-	<!-- <haxelib name="markdown" /> -->
-	<!-- <haxelib name="HtmlParser" /> -->
-
-	<!--In case you want to use nape with flixel-->
-	<!--<haxelib name="nape-haxe4" />-->
+	<!-- Others -->
+	<haxedev set='webgl' />
+	<haxelib name="faxe" if='switch'/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -105,14 +112,9 @@
 
 	<!-- _________________________________ Custom _______________________________ -->
 
-	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
-	
 	<icon path="assets/engine/flixel-icons/16.png" size='16'/>
 	<icon path="assets/engine/flixel-icons/32.png" size='32'/>
 	<icon path="assets/engine/flixel-icons/64.png" size='64'/>
 	<icon path="assets/engine/flixel-icons/OG.png" />
-	
-	<haxedef name="CAN_OPEN_LINKS" unless="switch"/>
-	<haxedef name="CAN_CHEAT" if="switch debug"/>
 	
 </project>

@@ -881,6 +881,7 @@ class PlayState extends MusicBeatState
 
 	function playVideo(name:String)
 	{
+		#if VIDEOS_ALLOWED
 		inCutscene = true;
 
 		var video:FlxVideo = new FlxVideo();
@@ -890,6 +891,7 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
+		#end
 	}
 
 	function chooseEnding()
