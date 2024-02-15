@@ -8,8 +8,8 @@
 ## Credits:
 - GuineaPigUuhh for the Code (Yippeee!)
 ### Special Thanks
-- hxCodec for the .MP4 Video Loader.
-- FlxAnimate Team for the Animate Atlas Support.
+- [hxCodec](https://github.com/polybiusproxy/hxCodec) for the .MP4 Video Loader.
+- [FlxAnimate](https://github.com/Dot-Stuff/flxanimate/) Team for the Animate Atlas Support.
 
 # Build instructions
 1. install [Git](https://git-scm.com/download/win)
