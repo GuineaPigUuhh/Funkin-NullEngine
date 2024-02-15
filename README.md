@@ -7,7 +7,6 @@
 ## Anyone who wants to be a contributor to the engine just ask me on my discord on my profile
 ## Credits:
 - GuineaPigUuhh for the Code (Yippeee!)
-### Special Thanks
 - [hxCodec](https://github.com/polybiusproxy/hxCodec) for the .MP4 Video Loader.
 - [FlxAnimate](https://github.com/Dot-Stuff/flxanimate/) Team for the Animate Atlas Support.
 
