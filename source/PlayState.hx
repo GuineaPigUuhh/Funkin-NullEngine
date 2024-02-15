@@ -47,7 +47,7 @@ import shaderslmfao.BuildingShaders.BuildingShader;
 import shaderslmfao.BuildingShaders;
 import shaderslmfao.ColorSwap;
 import ui.PreferencesMenu;
-import vlc.MP4Handler as VideoHandler; // Haxelib Hxcodec 2.5.1
+import vlc.MP4Handler as FlxVideo; // Haxelib Hxcodec 2.5.1
 
 using StringTools;
 
@@ -885,10 +885,10 @@ class PlayState extends MusicBeatState
 		inCutscene = true;
 
 		var video:FlxVideo = new FlxVideo();
-		video.playVideo(filepath);
+		video.playVideo(AssetsHelper.video(name));
 		video.finishCallback = function()
 		{
-			startAndEnd();
+			chooseEnding();
 			return;
 		}
 		#end
