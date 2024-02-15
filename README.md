@@ -1,5 +1,5 @@
 # Friday Night Funkin'- Null Engine
-## ⚠ the Engine is in BETA phase, use it knowing that there will be bugs ⚠
+## ⚠ <code style="color : red">the Engine is in BETA phase, use it knowing that there will be bugs</code> ⚠
 
 ![EngineLogo](assets/engine/logo.png)
 
