@@ -21,12 +21,19 @@
         - Windows 10/11 SDK (any works)
 4. run the [install.bat](https://github.com/GuineaPigUuhh/Funkin-NullEngine/blob/main/install-libs/install.bat) file inside the install-libs folder to install the libs that the engine needs
 
+# Features
+- [x] Modular System
+    - [x] Characters
+    - [x] Menu Characters
+    - [] Weeks (some things are missing)
+    - [x] Stages
+- [x] cool Tolerant Json Lib by [JWambaugh](https://github.com/JWambaugh)
 
-## To-do
-- [x] a better modular System of Characters, Stages, Weeks and Story Mode Menu Characters
-- [x] A system of Complete Scripts (the script system lacks some variables and some functions)
-- [ ] Folder Organization
-- [ ] Organization in Source Folders
-- [ ] new Editors
-- [ ] Support Mods
-- [x] Better README
+# To-do 
+- [] Custom HUD
+- [] Mod Support
+- [] new Editors
+    - [] Character Editor
+    - [] Stage Editor (Maybe?)
+    - [] Better Chart Editor
+- [] Folder Organization (Source)

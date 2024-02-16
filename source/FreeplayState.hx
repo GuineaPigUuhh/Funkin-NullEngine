@@ -1,6 +1,6 @@
 package;
 
-#if discord_rpc
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import FNFManager.WeeksManager;
@@ -41,7 +41,7 @@ class FreeplayState extends MusicBeatState
 	{
 		WeeksManager.load();
 
-		#if discord_rpc
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end

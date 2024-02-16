@@ -51,7 +51,7 @@ import vlc.MP4Handler as FlxVideo; // Haxelib Hxcodec 2.5.1
 
 using StringTools;
 
-#if discord_rpc
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 
@@ -161,7 +161,7 @@ class PlayState extends MusicBeatState
 
 	var inCutscene:Bool = false;
 
-	#if discord_rpc
+	#if DISCORD_ALLOWED
 	// Discord RPC variables
 	var iconRPC:String = "";
 	var detailsText:String = "";
@@ -220,7 +220,7 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(AssetsHelper.getFilePath('songs/thorns/thornsDialogue', TEXT));
 		}
 
-		#if discord_rpc
+		#if DISCORD_ALLOWED
 		initDiscord();
 		#end
 		storyDifficultyText = CoolUtil.difficultyString(storyDifficulty);
@@ -904,7 +904,7 @@ class PlayState extends MusicBeatState
 
 	function initDiscord():Void
 	{
-		#if discord_rpc
+		#if DISCORD_ALLOWED
 		iconRPC = SONG.player2;
 
 		// To avoid having duplicate images in Discord assets
@@ -1163,7 +1163,7 @@ class PlayState extends MusicBeatState
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
 
-		#if discord_rpc
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC, true, songLength);
 		#end
@@ -1329,7 +1329,7 @@ class PlayState extends MusicBeatState
 				startTimer.active = true;
 			paused = false;
 
-			#if discord_rpc
+			#if DISCORD_ALLOWED
 			if (startTimer.finished)
 				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC, true, songLength - Conductor.songPosition);
 			else
@@ -1340,7 +1340,7 @@ class PlayState extends MusicBeatState
 		super.closeSubState();
 	}
 
-	#if discord_rpc
+	#if DISCORD_ALLOWED
 	override public function onFocus():Void
 	{
 		if (health > 0 && !paused && FlxG.autoPause)
@@ -1469,7 +1469,7 @@ class PlayState extends MusicBeatState
 			pauseSubState.camera = camHUD;
 			boyfriendPos.put();
 
-			#if discord_rpc
+			#if DISCORD_ALLOWED
 			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconRPC);
 			#end
 		}
@@ -1478,7 +1478,7 @@ class PlayState extends MusicBeatState
 		{
 			FlxG.switchState(new ChartingState());
 
-			#if discord_rpc
+			#if DISCORD_ALLOWED
 			DiscordClient.changePresence("Chart Editor", null, null, true);
 			#end
 		}
@@ -1585,7 +1585,7 @@ class PlayState extends MusicBeatState
 
 				// FlxG.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
-				#if discord_rpc
+				#if DISCORD_ALLOWED
 				// Game Over doesn't get his own variable because it's only used here
 				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC);
 				#end

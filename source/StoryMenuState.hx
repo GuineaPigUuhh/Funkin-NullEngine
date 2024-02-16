@@ -1,6 +1,6 @@
 package;
 
-#if discord_rpc
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import FNFManager.WeeksManager;
@@ -93,7 +93,7 @@ class StoryMenuState extends MusicBeatState
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
 
-		#if discord_rpc
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
