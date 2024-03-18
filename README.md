@@ -25,15 +25,15 @@
 - [x] Modular System
     - [x] Characters
     - [x] Menu Characters
-    - [] Weeks (some things are missing)
+    - [ ] Weeks (some things are missing)
     - [x] Stages
 - [x] cool Tolerant Json Lib by [JWambaugh](https://github.com/JWambaugh)
 
 # To-do 
-- [] Custom HUD
-- [] Mod Support
-- [] new Editors
-    - [] Character Editor
-    - [] Stage Editor (Maybe?)
-    - [] Better Chart Editor
-- [] Folder Organization (Source)
+- [ ] Custom HUD
+- [ ] Mod Support
+- [ ] new Editors
+    - [ ] Character Editor
+    - [ ] Stage Editor (Maybe?)
+    - [ ] Better Chart Editor
+- [ ] Folder Organization (Source)

@@ -46,7 +46,7 @@
 
 	<define name="MODS_ALLOWED" if="desktop" />
 	<define name="VIDEOS_ALLOWED" if="desktop || android" />
-	<define name="DISCORD_ALLOWED" if="desktop" />
+	<!--<define name="DISCORD_ALLOWED" if="desktop" />-->
 
 	<haxedef name="CAN_OPEN_LINKS" unless="switch"/>
 

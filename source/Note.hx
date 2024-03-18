@@ -41,6 +41,12 @@ class Note extends FlxSprite
 	public var colorSwap:ColorSwap;
 	public var noteScore:Float = 1;
 
+	// Copycat
+	public var copyX:Bool = true;
+	public var copyY:Bool = true;
+	public var copyAngle:Bool = true;
+	public var copyAlpha:Bool = true;
+
 	public static var swagWidth:Float = 160 * 0.7;
 	public static var PURP_NOTE:Int = 0;
 	public static var GREEN_NOTE:Int = 2;
@@ -137,6 +143,9 @@ class Note extends FlxSprite
 
 		if (isSustainNote && prevNote != null)
 		{
+			copyAngle = false;
+			copyAlpha = false;
+
 			noteScore * 0.2;
 			alpha = 0.6;
 

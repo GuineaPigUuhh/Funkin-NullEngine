@@ -80,9 +80,11 @@ class MainMenuState extends MusicBeatState
 		menuItems.enabled = true;
 		menuItems.createItem('story mode', function() startExitState(new StoryMenuState()));
 		menuItems.createItem('freeplay', function() startExitState(new FreeplayState()));
+
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
-		menuItems.createItem('donate', selectDonate, hasPopupBlocker);
+		var donateCommand = function() SystemUtil.openURL("https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/");
+		menuItems.createItem('donate', donateCommand, hasPopupBlocker);
 		#end
 		// menuItems.createItem('options', function() startExitState(new OptionsState()));
 
@@ -110,23 +112,6 @@ class MainMenuState extends MusicBeatState
 	{
 		FlxG.camera.follow(selected, null, 0.1);
 	}
-
-	#if CAN_OPEN_LINKS
-	function selectDonate()
-	{
-		#if linux
-		// Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
-		Sys.command('/usr/bin/xdg-open', [
-			"https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/",
-			"&"
-		]);
-		#else
-		// FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
-
-		FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/');
-		#end
-	}
-	#end
 
 	public function openPrompt(prompt:Prompt, onClose:Void->Void)
 	{
