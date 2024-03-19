@@ -194,7 +194,7 @@ class PlayState extends MusicBeatState
 	var camPos:FlxPoint;
 	var lightFadeShader:BuildingShaders;
 
-	var divider:String = " • ";
+	final divider:String = " • ";
 
 	var global_scripts:ScriptPack;
 	var song_scripts:ScriptPack;

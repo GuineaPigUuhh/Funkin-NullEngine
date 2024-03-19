@@ -5,88 +5,102 @@ import Sys.sleep;
 using StringTools;
 
 #if DISCORD_ALLOWED
-import discord_rpc.DiscordRpc;
+import hxdiscord_rpc.Discord;
+import hxdiscord_rpc.Types;
 #end
 
 class DiscordClient
 {
 	#if DISCORD_ALLOWED
-	public function new()
-	{
-		trace("Discord Client starting...");
-		DiscordRpc.start({
-			clientID: "814588678700924999",
-			onReady: onReady,
-			onError: onError,
-			onDisconnected: onDisconnected
-		});
-		trace("Discord Client started.");
+	private static var presence:DiscordRichPresence = DiscordRichPresence.create();
+	public static var connected_user:String = "Unknown";
 
-		while (true)
+	public static final _defID:String = "1204517234467278979";
+	public static var clientID(default, set):String = _defID;
+
+	public static function set_clientID(value:String)
+	{
+		if ((clientID != value) && isInitialized)
 		{
-			DiscordRpc.process();
-			sleep(2);
-			// trace("Discord Client Update");
+			shutdown();
+			init();
+			updatePresence();
 		}
-
-		DiscordRpc.shutdown();
+		return clientID = value;
 	}
 
-	public static function shutdown()
-	{
-		DiscordRpc.shutdown();
-	}
+	public static var isInitialized:Bool = false;
 
-	static function onReady()
+	public static function init()
 	{
-		DiscordRpc.presence({
-			details: "In the Menus",
-			state: null,
-			largeImageKey: 'icon',
-			largeImageText: "Friday Night Funkin'"
-		});
-	}
+		var handlers:DiscordEventHandlers = DiscordEventHandlers.create();
+		handlers.ready = cpp.Function.fromStaticFunction(onReady);
+		handlers.disconnected = cpp.Function.fromStaticFunction(onDisconnected);
+		handlers.errored = cpp.Function.fromStaticFunction(onError);
+		Discord.Initialize(clientID, cpp.RawPointer.addressOf(handlers), 1, null);
 
-	static function onError(_code:Int, _message:String)
-	{
-		trace('Error! $_code : $_message');
-	}
+		if (!isInitialized)
+			trace("new DiscordPrecense(): Created");
 
-	static function onDisconnected(_code:Int, _message:String)
-	{
-		trace('Disconnected! $_code : $_message');
-	}
-
-	public static function initialize()
-	{
-		var DiscordDaemon = sys.thread.Thread.create(() ->
+		sys.thread.Thread.create(() ->
 		{
-			new DiscordClient();
+			var localID:String = clientID;
+			while (localID == clientID)
+			{
+				#if DISCORD_DISABLE_IO_THREAD
+				Discord.UpdateConnection();
+				#end
+				Discord.RunCallbacks();
+				Sys.sleep(0.5);
+			}
 		});
-		trace("Discord Client initialized");
+		isInitialized = true;
 	}
 
-	public static function changePresence(details:String, state:Null<String>, ?smallImageKey:String, ?hasStartTimestamp:Bool, ?endTimestamp:Float)
+	private static function onReady(request:cpp.RawConstPointer<DiscordUser>):Void
 	{
-		var startTimestamp:Float = if (hasStartTimestamp) Date.now().getTime() else 0;
+		var requestPtr:cpp.Star<DiscordUser> = cpp.ConstPointer.fromRaw(request).ptr;
 
+		connected_user = cast(requestPtr.username, String);
+		if (Std.parseInt(cast(requestPtr.discriminator, String)) != 0)
+			trace('(Discord) Connected to User (${connected_user}#${cast (requestPtr.discriminator, String)})');
+		else
+			trace('(Discord) Connected to User (${connected_user})');
+
+		changePresence();
+	}
+
+	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void
+		trace('Discord: Error ($errorCode: ${cast (message, String)})');
+
+	private static function onDisconnected(errorCode:Int, message:cpp.ConstCharStar):Void
+		trace('Discord: Disconnected ($errorCode: ${cast (message, String)})');
+
+	public dynamic static function shutdown()
+	{
+		Discord.Shutdown();
+		isInitialized = false;
+	}
+
+	public static function updatePresence()
+		Discord.UpdatePresence(cpp.RawConstPointer.addressOf(presence));
+
+	public static function changePresence(details:String = "Nothing", ?state:Null<String>, ?smallImageKey:String, ?hasStartTimestamp:Bool, ?endTimestamp:Float)
+	{
+		var startTimestamp:Float = 0;
+		if (hasStartTimestamp)
+			startTimestamp = Date.now().getTime();
 		if (endTimestamp > 0)
-		{
 			endTimestamp = startTimestamp + endTimestamp;
-		}
 
-		DiscordRpc.presence({
-			details: details,
-			state: state,
-			largeImageKey: 'icon',
-			largeImageText: "Friday Night Funkin'",
-			smallImageKey: smallImageKey,
-			// Obtained times are in milliseconds so they are divided so Discord can use it
-			startTimestamp: Std.int(startTimestamp / 1000),
-			endTimestamp: Std.int(endTimestamp / 1000)
-		});
+		presence.details = details;
+		presence.state = state;
+		presence.largeImageKey = 'icon';
+		presence.smallImageKey = smallImageKey;
+		presence.startTimestamp = Std.int(startTimestamp / 1000);
+		presence.endTimestamp = Std.int(endTimestamp / 1000);
 
-		// trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp');
+		updatePresence();
 	}
 	#end
 }

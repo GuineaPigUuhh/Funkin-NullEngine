@@ -17,6 +17,7 @@ import openfl.media.Video;
 import openfl.net.NetConnection;
 import openfl.net.NetStream;
 import ui.PreferencesMenu;
+import Discord.DiscordClient;
 
 class Main extends Sprite
 {
@@ -107,13 +108,9 @@ class Main extends Sprite
 		PlayerSettings.init();
 		Highscore.load();
 
-		#if discord_rpc
-		DiscordClient.initialize();
-
-		Application.current.onExit.add(function(exitCode)
-		{
-			DiscordClient.shutdown();
-		});
+		#if DISCORD_ALLOWED
+		DiscordClient.init();
+		Application.current.onExit.add(function(exitCode) DiscordClient.shutdown());
 		#end
 	}
 }
