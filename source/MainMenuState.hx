@@ -65,7 +65,7 @@ class MainMenuState extends MusicBeatState
 		magenta.y = bg.y;
 		magenta.visible = false;
 		magenta.color = 0xFFfd719b;
-		if (PreferencesMenu.preferences.get('flashing-menu'))
+		if (Settings.get('flashing-menu'))
 			add(magenta);
 		// magenta.scrollFactor.set();
 
@@ -86,7 +86,7 @@ class MainMenuState extends MusicBeatState
 		var donateCommand = function() SystemUtil.openURL("https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/");
 		menuItems.createItem('donate', donateCommand, hasPopupBlocker);
 		#end
-		// menuItems.createItem('options', function() startExitState(new OptionsState()));
+		menuItems.createItem('options', function() startExitState(new OptionsState()));
 
 		// center vertically
 		var spacing = 160;

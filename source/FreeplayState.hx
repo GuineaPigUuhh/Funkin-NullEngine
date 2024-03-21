@@ -21,8 +21,8 @@ class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
 
-	// var selector:FlxText;
-	var curSelected:Int = 0;
+	public static var curSelected:Int = 0;
+
 	var curDifficulty:Int = 1;
 
 	var scoreText:FlxText;
@@ -181,22 +181,22 @@ class FreeplayState extends MusicBeatState
 		curDifficulty += change;
 
 		if (curDifficulty < 0)
-			curDifficulty = CoolUtil.difficultyArray.length - 1;
-		if (curDifficulty > CoolUtil.difficultyArray.length - 1)
+			curDifficulty = DifficultyUtil.diffs.length - 1;
+		if (curDifficulty > DifficultyUtil.diffs.length - 1)
 			curDifficulty = 0;
 
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
 
 		PlayState.storyDifficulty = curDifficulty;
 
-		diffText.text = switch (CoolUtil.difficultyArray.length)
+		diffText.text = switch (DifficultyUtil.diffs.length)
 		{
 			case 0:
 				"< - >";
 			case 1:
-				CoolUtil.difficultyString(PlayState.storyDifficulty);
+				DifficultyUtil.getDifficulty(PlayState.storyDifficulty);
 			default:
-				"< " + CoolUtil.difficultyString(PlayState.storyDifficulty) + " >";
+				"< " + DifficultyUtil.getDifficulty(PlayState.storyDifficulty) + " >";
 		}
 
 		positionHighscore();

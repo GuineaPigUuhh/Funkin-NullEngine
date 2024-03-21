@@ -42,12 +42,6 @@ class ChartingState extends MusicBeatState
 
 	var UI_box:FlxUITabMenu;
 
-	/**
-	 * Array of notes showing when each section STARTS in STEPS
-	 * Usually rounded up??
-	 */
-	var curSection:Int = 0;
-
 	public static var lastSection:Int = 0;
 
 	var bpmTxt:FlxText;
@@ -87,8 +81,6 @@ class ChartingState extends MusicBeatState
 
 	override function create()
 	{
-		curSection = lastSection;
-
 		chartBG = new FlxSprite().loadGraphic(AssetsHelper.image('menus/main/menuDesat'));
 		chartBG.color = 0xFF292929;
 		chartBG.alpha = 1;

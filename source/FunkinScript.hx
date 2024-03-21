@@ -7,6 +7,8 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
+using StringTools;
+
 class FunkinScript extends Script
 {
 	public var interp:Interp;
@@ -42,15 +44,8 @@ class FunkinScript extends Script
 	{
 		if (interp == null)
 			return null;
-
 		if (interp.variables.exists(name))
-		{
-			var functionH = get(name);
-
-			var result = null;
-			result = Reflect.callMethod(null, functionH, value);
-			return result;
-		}
+			return Reflect.callMethod(null, get(name), value);
 		return null;
 	}
 
@@ -62,11 +57,12 @@ class FunkinScript extends Script
 		set("destroy", daState.destroy);
 		set("remove", daState.remove);
 
-		// haxe
+		// Haxe
 		set('Type', Type);
 		set('Math', Math);
 		set('Std', Std);
 		set('Date', Date);
+		set('StringTools', StringTools);
 
 		// flixel
 		set('FlxG', flixel.FlxG);

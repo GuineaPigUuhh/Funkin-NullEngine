@@ -1,0 +1,10 @@
+function onCreate() {}
+function onCreatePost() {}
+function onUpdate() {}
+function onUpdatePost() {}
+function onBeatHit() {}
+function onStepHit() {}
+function onPlayerHit(note) {}
+function onOpponentHit(note) {}
+function onMiss(note) {}
+function onForceMiss(direction) {}

@@ -26,16 +26,9 @@
       "version": "2.5.0"
     },
     {
-      "name": "polymod",
+      "name": "hxdiscord_rpc",
       "type": "haxelib",
-      "version": "1.7.0"
-    },
-    {
-      "name": "discord_rpc",
-      "type": "git",
-      "dir": null,
-      "ref": "master",
-      "url": "https://github.com/Aidan63/linc_discord-rpc"
+      "version": null
     },
     {
       "name": "tjson",

@@ -76,14 +76,13 @@
 	<haxelib name="flixel-addons" />
 
 	<!-- Funkin -->
-	<haxelib name="polymod" if="MODS_ALLOWED" />
 	<haxelib name="hxdiscord_rpc" if="DISCORD_ALLOWED" />
 
 	<!-- Null Engine -->
 	<haxelib name="hscript" />
 	<haxelib name="flxanimate" />
 	<haxelib name="tjson" />
-	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
+	<haxelib name="hxcodec" if="VIDEOS_ALLOWED" />
 
 	<!-- Debug -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug" />
@@ -138,11 +137,12 @@
 	this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 
+	<haxedef name='no-deprecation-warnings' />
+
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<icon path="assets/engine/flixel-icons/16.png" size='16' />
 	<icon path="assets/engine/flixel-icons/32.png" size='32' />
 	<icon path="assets/engine/flixel-icons/64.png" size='64' />
 	<icon path="assets/engine/flixel-icons/OG.png" />
-
 </project>

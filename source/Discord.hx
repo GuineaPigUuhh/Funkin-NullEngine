@@ -39,9 +39,6 @@ class DiscordClient
 		handlers.errored = cpp.Function.fromStaticFunction(onError);
 		Discord.Initialize(clientID, cpp.RawPointer.addressOf(handlers), 1, null);
 
-		if (!isInitialized)
-			trace("new DiscordPrecense(): Created");
-
 		sys.thread.Thread.create(() ->
 		{
 			var localID:String = clientID;
@@ -85,7 +82,8 @@ class DiscordClient
 	public static function updatePresence()
 		Discord.UpdatePresence(cpp.RawConstPointer.addressOf(presence));
 
-	public static function changePresence(details:String = "Nothing", ?state:Null<String>, ?smallImageKey:String, ?hasStartTimestamp:Bool, ?endTimestamp:Float)
+	public static function changePresence(details:String = "in The Menus", ?state:Null<String>, ?smallImageKey:String, ?hasStartTimestamp:Bool,
+			?endTimestamp:Float)
 	{
 		var startTimestamp:Float = 0;
 		if (hasStartTimestamp)

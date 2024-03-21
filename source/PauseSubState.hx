@@ -39,7 +39,7 @@ class PauseSubState extends MusicBeatSubstate
 
 		menuItems = pauseOG;
 
-		difficultyChoices = CoolUtil.difficultyArray;
+		difficultyChoices = DifficultyUtil.diffs;
 		difficultyChoices.push('BACK');
 
 		pauseMusic = new FlxSound().loadEmbedded(AssetsHelper.music('breakfast'), true, true);
@@ -61,7 +61,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelInfo);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
-		levelDifficulty.text += CoolUtil.difficultyString(PlayState.storyDifficulty);
+		levelDifficulty.text += DifficultyUtil.getDifficulty(PlayState.storyDifficulty);
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(AssetsHelper.font('vcr', "ttf"), 32);
 		levelDifficulty.updateHitbox();

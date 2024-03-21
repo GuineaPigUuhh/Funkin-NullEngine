@@ -3,11 +3,22 @@ class CustomStage
 	public var executed:Bool = false;
 	public var script:FunkinScript;
 	public var stage:String = null;
+	public var preset_vars(default, set):Map<String, Dynamic> = [];
+
+	public function set_preset_vars(value:Map<String, Dynamic>)
+	{
+		preset_vars = value;
+		for (name => value in preset_vars)
+		{
+			set(name, value);
+		}
+		return value;
+	}
 
 	public function new(curStage:String)
 	{
 		stage = curStage;
-	} // to load
+	}
 
 	public function execute()
 	{

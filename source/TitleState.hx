@@ -131,9 +131,6 @@ class TitleState extends MusicBeatState
 	{
 		if (event.info.code == 'NetStream.Play.Complete')
 		{
-			// netStream.dispose();
-			// FlxG.stage.removeChild(video);
-
 			startIntro();
 		}
 
